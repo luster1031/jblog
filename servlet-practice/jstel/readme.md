@@ -1,6 +1,8 @@
 # EL & JSTL
 + el : 자바 코드가 아닌 문법 체계
 
+<br>
+
 ----------------------------------
 
 # 변수의  scope 연습
@@ -8,30 +10,33 @@
 > 01.jsp
 
 + el로 값 출력
-	+ request 에 저장된 이름으로 접근
+	- request 에 저장된 이름으로 접근
 + object 객체 출력
-	+ null인 객체를 찍으면 어떻게 되나? -> 안 나옴
+	- null인 객체를 찍으면 어떻게 되나? -> 안 나옴
 + map 객체 출력
 + 산술 연산
 + 관계 연산
 	```
-		${obj == null}
+	${obj == null}
 	```
 	이면 null은 자바 코드(자바 키워드)인데 지원을 해주긴 한다. 
 	```
-		${empty obj}
+	${empty obj}
 	```
 	이게 훨씬 좋음	
+	<br>
+	
 + 논리 연산
 	+ attribute : 이름="값"
 	+ <c:if> : el 결과가 참이면 실행 
 		+ <c:if name="${name eq '이름'}">
+		<br>
 + 요청 파라미터를 빼 와야 할 때
 	+ ${param.(요청파라미터이름)}
 	+ 안 나오면 안 찍힘
 	+ <%= %> 없애야 한다. 
 
-## Scope
+# Scope
 ### 1. scope 범위
 + 객체가 존재하는 범위
 
@@ -58,6 +63,7 @@ request.getServletContext().setAttribute("my", response);
 	${sessionScope.vo.no }
 	```
 	따로 써줘야 한다. 안 하면 page scope부터 접근 함<br>
+<br>
 
 
 ## hearder.jsp el형식으로 바꾸기
@@ -166,7 +172,7 @@ ${fn:replace(vo.message,newline,"<br/>")}
 
 -------------------------------------------
 ## jsp templet 만들기
-> Preferences - jsp Files - Editor - Templates
+> Preferences -> jsp Files -> Editor -> Templates
 
 ```
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
