@@ -1,7 +1,9 @@
 # EL & JSTL
 + el : 자바 코드가 아닌 문법 체계
 
-### 변수의  scope 연습 - 01.jsp
+----------------------------------
+
+# 변수의  scope 연습
 > _01Servlet.java<br>
 > 01.jsp
 
@@ -36,9 +38,11 @@
 ### 2. 객체가 오래 지속되는 순서
 Application(Context) Scope > Session Scope > Request Scope > Page Scope 
 + Application
+
 ```
 request.getServletContext().setAttribute("my", response);
 ```
+<br>
 
 ### 3. EL이 이름으로 객체를 찾는 순서
 
@@ -53,7 +57,8 @@ request.getServletContext().setAttribute("my", response);
 	```
 	${sessionScope.vo.no }
 	```
-	따로 써줘야 한다. 안 하면 page scope부터 접근 함
+	따로 써줘야 한다. 안 하면 page scope부터 접근 함<br>
+
 
 ## hearder.jsp el형식으로 바꾸기
 ```
@@ -67,6 +72,7 @@ ${pageContext.request.contextPath }
 ↓↓
 ${authUser.name }
 ```
+<br>
 
 ## JSTL
 + jstl/pom.xml추가
@@ -87,6 +93,8 @@ ${authUser.name }
 > 03.jsp
 
 
+<br>
+
 + taglib추가 
 
 ```
@@ -94,6 +102,8 @@ ${authUser.name }
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 ```
+
+<br>
 
 + page context에 저장
 
@@ -105,5 +115,68 @@ ${authUser.name }
 	<c:set var = "count" value = "3"/>
 ```
 
+<br>
+
++ jsp:include
+
+```
+<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+↓↓↓↓
+<c:import url="/WEB-INF/views/includes/header.jsp" />
+
+```
+
+<br>
+
++ if문
+
+```
+<c:choose>
+	<c:when test="조건">
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+</c:choose>
+```
 
 
+<br>
+
++ for 문
+
+```
+<c:forEach  begin="시작" end = "끝" step = "몇개씩 증가" var="이름">
+</c:forEach>
+```
+<br>
+
++ replace
+
+```
+<%pageContext.setAttribute("newline", "\n"); %>
+${fn:replace(vo.message,newline,"<br/>")}
+
+```
+
+
+-------------------------------------------
+## jsp templet 만들기
+> Preferences - jsp Files - Editor - Templates
+
+```
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+	<%@ page language="java" contentType="text/html; charset=${encoding}"
+	    pageEncoding="${encoding}"%>
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="${encoding}">
+	<title>Insert title here</title>
+	</head>
+	<body>
+	${cursor}
+	</body>
+	</html>
+```

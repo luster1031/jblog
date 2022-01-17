@@ -1,9 +1,14 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@page import="com.poscoict.mysite.vo.UserVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.poscoict.mysite.dao.GuestbookDao"%>
 <%@page import="com.poscoict.mysite.vo.GuestbookVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	List<GuestbookVo> list = (List<GuestbookVo>)request.getAttribute("list");
+	pageContext.setAttribute("newline", "\n");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +52,7 @@
 									<td><a href="<%=request.getContextPath() %>/guestbook?a=deleteform&no=<%=vo.getNo() %>">삭제</a></td>
 								</tr>
 								<tr>
-									<td colspan=4><%=vo.getMessage().replaceAll("\n", "<br/>") %></td>
+									<td colspan=4>${fn:replace(vo.message ,newline ,"<br/>")}</td>
 								</tr>
 							</table>
 							<br>
