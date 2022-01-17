@@ -2,7 +2,7 @@
 + el : 자바 코드가 아닌 문법 체계
 
 ### 변수의  scope 연습 - 01.jsp
-> _01Servlet.java
+> _01Servlet.java<br>
 > 01.jsp
 
 + el로 값 출력
@@ -42,8 +42,8 @@ request.getServletContext().setAttribute("my", response);
 
 ### 3. EL이 이름으로 객체를 찾는 순서
 
-> _02Servlet.java
-> 02.jsp
+> _02Servlet.java <br>
+> 02.jsp 
 
 + Page Scope -→ Request Scope -→ Session Scope -→  Application(Context) Scope
 
@@ -83,7 +83,7 @@ ${authUser.name }
 	
 + jstl태그 사용해서 
 
-> _03Servlet.java
+> _03Servlet.java <br>
 > 03.jsp
 
 
