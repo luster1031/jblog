@@ -2,10 +2,9 @@
 + el : 자바 코드가 아닌 문법 체계
 
 ### 변수의  scope 연습 - 01.jsp
-```
-_01Servlet.java
-01.jsp
-```
+> _01Servlet.java
+> 01.jsp
+
 + el로 값 출력
 	+ request 에 저장된 이름으로 접근
 + object 객체 출력
@@ -42,10 +41,10 @@ request.getServletContext().setAttribute("my", response);
 ```
 
 ### 3. EL이 이름으로 객체를 찾는 순서
-```
-_02Servlet.java
-02.jsp
-```
+
+> _02Servlet.java
+> 02.jsp
+
 + Page Scope -→ Request Scope -→ Session Scope -→  Application(Context) Scope
 
 + 주의 : 같은 이름으로 여러 범위에 객체를 저장할 경우, 주의가 필요
@@ -84,10 +83,9 @@ ${authUser.name }
 	
 + jstl태그 사용해서 
 
-```
-	_03Servlet.java
-	03.jsp
-```
+> _03Servlet.java
+> 03.jsp
+
 
 + taglib추가 
 
