@@ -23,3 +23,7 @@
 
 + [guestbook2](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice/guestbook02)
     + servlet활용 방명록 프로그램
+
++ [jstel]
+(https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice/jstel)
+	+ EL & JSTL 연습, scope 학습
