@@ -21,6 +21,7 @@ public class DeleteAction implements Action {
 		vo.setNo(Long.parseLong(no));
 		vo.setPassword(password);
 		
+		System.out.println(password);
 		new GuestbookDao().delete(vo);
 		MvcUtil.redirect(request.getContextPath() + "/guestbook", request, response);
 	}

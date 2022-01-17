@@ -12,9 +12,10 @@
 		<div id="content">
 			<div id="user">
 				<p class="jr-success">
-					회원가입을 축하합니다.
+					회원정보 수정이 완료 되었습니다. <br>
+					다시 로그인 해주세요! 
 					<br><br>
-					<a href="${pageContext.request.contextPath }/board">게시판보기</a>
+					<a href="${pageContext.request.contextPath }/user?a=loginform">로그인하기</a>
 				</p>				
 			</div>
 		</div>

@@ -12,6 +12,7 @@ import com.poscoict.web.util.MvcUtil;
 public class DeleteFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		MvcUtil.forward("guestbook/deleteform", request, response);
 	}
 }
