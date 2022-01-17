@@ -16,6 +16,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -42,7 +49,7 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
-		</resources>  
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

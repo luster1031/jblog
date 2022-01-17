@@ -1,7 +1,11 @@
 # EL & JSTL
 + el : 자바 코드가 아닌 문법 체계
 
-### 연습 - 01.jsp
+### 변수의  scope 연습 - 01.jsp
+```
+_01Servlet.java
+01.jsp
+```
 + el로 값 출력
 	+ request 에 저장된 이름으로 접근
 + object 객체 출력
@@ -25,3 +29,83 @@
 	+ ${parma.(요청파라미터이름)}
 	+ 안 나오면 안 찍힘
 	+ <%= %> 없애야 한다. 
+
+## Scope
+### 1. scope 범위
++ 객체가 존재하는 범위
+
+### 2. 객체가 오래 지속되는 순서
+Application(Context) Scope > Session Scope > Request Scope > Page Scope 
++ Application
+```
+request.getServletContext().setAttribute("my", response);
+```
+
+### 3. EL이 이름으로 객체를 찾는 순서
+```
+_02Servlet.java
+02.jsp
+```
++ Page Scope -→ Request Scope -→ Session Scope -→  Application(Context) Scope
+
++ 주의 : 같은 이름으로 여러 범위에 객체를 저장할 경우, 주의가 필요
+
++ session 객체 접근하기 위해서는 
+	```
+	${sessionScope.vo.no }
+	```
+	따로 써줘야 한다. 안 하면 page scope부터 접근 함
+
+## hearder.jsp el형식으로 바꾸기
+```
+<%=request.getContextPath()%>
+↓↓
+${pageContext.request.contextPath }
+```
+
+```
+<%=authUser.getName()%>
+↓↓
+${authUser.name }
+```
+
+## JSTL
++ jstl/pom.xml추가
+
+	```
+	<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+	```
++ 프로젝트 Maven Dependencies에서 확인 ->  jstl-1.2.jar들어갔는 지
+	
++ jstl태그 사용해서 
+
+```
+	_03Servlet.java
+	03.jsp
+```
+
++ taglib추가 
+
+```
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+```
+
++ page context에 저장
+
+```
+	<%
+	pageContext.setAttribute("count",3);
+	%>
+	↓↓
+	<c:set var = "count" value = "3"/>
+```
+
+
+
