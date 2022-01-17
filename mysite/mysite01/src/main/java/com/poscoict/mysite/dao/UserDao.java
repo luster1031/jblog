@@ -112,4 +112,11 @@ public class UserDao {
 		
 		return conn;
 	}
+
+
+
+	public UserVo fidByNo(Long no) {
+		
+		return null;
+	}
 }
