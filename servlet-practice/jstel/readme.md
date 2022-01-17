@@ -27,7 +27,7 @@
 	+ <c:if> : el 결과가 참이면 실행 
 		+ <c:if name="${name eq '이름'}">
 + 요청 파라미터를 빼 와야 할 때
-	+ ${parma.(요청파라미터이름)}
+	+ ${param.(요청파라미터이름)}
 	+ 안 나오면 안 찍힘
 	+ <%= %> 없애야 한다. 
 
@@ -148,6 +148,11 @@ ${authUser.name }
 <c:forEach  begin="시작" end = "끝" step = "몇개씩 증가" var="이름">
 </c:forEach>
 ```
+
+```
+<c:forEach items="${list }" var = "vo">
+```
+
 <br>
 
 + replace
