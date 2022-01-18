@@ -9,31 +9,47 @@ src
 			|--- com.poscoict.web.util
 				|--- MvcUtil
 			
-			
 			|--- com.poscoict.mysite.contorller
 				|--- MainController
 				|--- UserController : 객체 지향 
-								
-			|--- com.poscoict.mysite.mvc.main
-				|--- MainActionFactory
-				|--- MainAction
-				
-			|--- com.poscoict.mysite.mvc.user
-				|--- UserActionFactory
-				|--- JoinFormAction
-				|--- JoinAction
-			|--- com.poscoict.mysite.mvc.guestbook
-				|--- 
-					
-					
+				|--- GuestbookController : 방명록Controller
 			|--- com.poscoict.mysite.dao
+				|--- GuestbookDao.java
+				|--- UserDao.java
 			|--- com.poscoict.mysite.vo
+				|--- GuestbookVo.java
+				|--- UserVo.java
+				
+			|--- com.poscoict.mysite.mvc.main
+				|--- MainActionFactory.java
+				|--- MainAction.java
+			|--- com.poscoict.mysite.mvc.user
+				|--- JoinAction.java
+				|--- JoinFormAction.java
+				|--- JoinSuccessAction.java
+				|--- LoginAction.java
+				|--- LoginFormAction.java
+				|--- LoginOutAction.java
+				|--- UpdateAction.java
+				|--- UpdateFormAction.java
+				|--- updateSuccessAction.java
+				|--- UserActionFactory.java
+			|--- com.poscoict.mysite.mvc.guestbook
+				|--- AddAction.java
+				|--- DeleteAction.java
+				|--- DeleteFormAction.java
+				|--- GuestbookActionFactory.java
+				|--- IndexAction.java
+					
 			|--- com.poscoict.web.mvc
-				|--- ActionFactory
-				|--- Action
-				
-				
+				|--- ActionFactory.java
+				|--- Action.java
 			|--- com.poscoict.web.filter
+				|--- readme.md
+				|--- EncodingFilter.java
+			|--- com.poscoict.web.util
+				|--- MvcUtil.java
+					
 		|--- resources
 		|--- webapp
 			|--- assets
@@ -46,6 +62,8 @@ src
 					|--- uestbook
 					|--- main 
 					|--- user
+					|--- includes
+					|--- web.xml
 
 
 ```
