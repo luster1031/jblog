@@ -47,3 +47,18 @@ private String encoding;
 		}
 	}
 	```
+
+------
+
++ servlet 지역변수
+	+private 지역변수랑 유사
+	
+
+> web.xml
+
+```
+<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/servlet-context.xml</param-value>
+		</init-param>
+```
