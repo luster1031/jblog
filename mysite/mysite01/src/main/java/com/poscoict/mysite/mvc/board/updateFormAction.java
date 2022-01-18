@@ -1,8 +1,6 @@
 package com.poscoict.mysite.mvc.board;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,25 +11,15 @@ import com.poscoict.mysite.vo.BoardVo;
 import com.poscoict.web.mvc.Action;
 import com.poscoict.web.util.MvcUtil;
 
-public class ListAction implements Action {
+public class updateFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 페이징
-		int pageCount = 10;
-		int currentPage = 2;
-		int nextPage = -1; 	//	-1이면 next가 없다. 
-		int startPage = 3;
-		int prePage = 2;
+		Long no = Long.parseLong(request.getParameter("no"));
+		BoardVo vo = new BoardDao().updateSerach(no);
 		
-		/*
-			Map<K, V> m;
-			m.put())
-		*/
-		
-		List<BoardVo> list = new BoardDao().findAll();
-		request.setAttribute("list", list);
-		MvcUtil.forward("board/list", request, response);
+		request.setAttribute("vo", vo);
+		MvcUtil.forward("board/modify", request, response);
 	}
 
 }
