@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +18,8 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="" method="post">
-					<input type="text" id="kwd" name="kwd" value=""> 
-					<input type="submit" value="찾기">
+					<input type="text" id="kwd" name="kwd" value=""> <input
+						type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
 					<tr>
@@ -40,13 +41,14 @@
 											src="${pageContext.servletContext.contextPath }/assets/images/reply.png"
 											height="100%">
 									</c:when>
-								</c:choose> 
-								<a href="${pageContext.servletContext.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a>
+								</c:choose> <a
+								href="${pageContext.servletContext.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a>
 							</td>
 							<td>${vo.userName }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.regDate }</td>
 							<!-- 글 쓴 사람이 아니면 삭제 못 하게 -->
+
 							<c:choose>
 								<c:when test="${authUser.no eq vo.userNo}">
 									<td><a
@@ -59,6 +61,7 @@
 										value="${pageContext.servletContext.contextPath }/board" />
 								</c:otherwise>
 							</c:choose>
+
 						</tr>
 					</c:forEach>
 				</table>
@@ -66,13 +69,28 @@
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
-						<li class="selected">2</li>
-						<li><a href="">3</a></li>
-						<li>4</li>
-						<li>5</li>
-						<li><a href="">▶</a></li>
+						<c:choose>
+							<c:when test="${m.prePage > 1}">
+								<li><a
+									href="${pageContext.servletContext.contextPath }/board?page=${m.prePage }">◀</a></li>
+							</c:when>
+						</c:choose>
+						<c:forEach var="num" begin="${m.startPage }" end="${m.endPage }">
+							<c:choose>
+								<c:when test="${num == m.currentPage }">
+									<c:set var="select" value='class="selected"'></c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="select" value=''></c:set>
+								</c:otherwise>
+							</c:choose>
+							<li ${select }><a href="${pageContext.servletContext.contextPath }/board?page=${num }">${num }</a></li>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${m.totalPage != m.endPage}">
+								<li><a href="${pageContext.servletContext.contextPath }/board?page=${m.nextPage }">▶</a></li>
+							</c:when>
+						</c:choose>
 					</ul>
 				</div>
 				<!-- pager 추가 -->

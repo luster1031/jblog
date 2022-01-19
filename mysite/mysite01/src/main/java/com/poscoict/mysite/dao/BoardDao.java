@@ -11,7 +11,8 @@ import java.util.List;
 import com.poscoict.mysite.vo.BoardVo;
 
 public class BoardDao {
-	public List<BoardVo> findAll() {
+	
+	public List<BoardVo> findAll(int start, int count) {
 		List<BoardVo> list = new ArrayList<>();
 
 		Connection conn = null;
@@ -21,12 +22,15 @@ public class BoardDao {
 			conn = getConnection();
 
 			String sql = "select b.no, b.title, b.hit,  b.contents, a.name, date_format(reg_date, '%Y/%m/%d %H:%i:%s'),"
-					+ " b.user_no, b.depth"
-					+ " from user a, board b" + " where a.no = b.user_no" 
-					+ " order by b.g_no desc,  b.o_no asc";
+					+ " b.user_no, b.depth" + " from user a, board b" + " where a.no = b.user_no"
+					+ " order by b.g_no desc,  b.o_no asc, b.depth asc"
+					+ " LIMIT ?, ?";
 
 			pstmt = conn.prepareStatement(sql);
-
+			
+			
+			pstmt.setInt(1, start*count);
+			pstmt.setInt(2, count);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -39,6 +43,8 @@ public class BoardDao {
 				Long user_no = rs.getLong(7);
 				int dep = rs.getInt(8);
 				
+				
+				
 				BoardVo vo = new BoardVo();
 				vo.setNo(no);
 				vo.setUserName(name);
@@ -48,7 +54,7 @@ public class BoardDao {
 				vo.setRegDate(date);
 				vo.setUserNo(user_no);
 				vo.setDepth(dep);
-				
+
 				list.add(vo);
 			}
 
@@ -128,6 +134,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int num = 1;
+		String no = null;
 		try {
 			conn = getConnection();
 
@@ -135,11 +142,16 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
-			String no = rs.getString(1);
-			if (no != null) {
+			if(rs.next())
+				no = rs.getString(1);
+			if(no!= null){
 				num = Integer.parseInt(no);
+			}else {
+				num = 1;
 			}
+			
 			return num;
+			
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -162,7 +174,7 @@ public class BoardDao {
 		return 1;
 	}
 
-	public boolean delete(int no) {
+	public boolean delete(BoardVo vo) {
 		boolean result = false;
 
 		Connection conn = null;
@@ -170,10 +182,11 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = " delete" + "   from board" + "  where no=?";
+			String sql = " delete" + "   from board" + "  where no=? and user_no=?";
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setLong(1, no);
+			pstmt.setLong(1, vo.getNo());
+			pstmt.setLong(2, vo.getUserNo());
 
 			int count = pstmt.executeUpdate();
 			result = count == 1;
@@ -326,6 +339,96 @@ public class BoardDao {
 			pstmt.setString(2, vo.getContents());
 			pstmt.setLong(3, vo.getNo());
 
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+
+		} catch (
+
+		SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+
+	public BoardVo findByNO(Long no) {
+		BoardVo result = null;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+
+			String sql = "select g_no, o_no, depth from board where no=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setLong(1, no);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+
+				int g_no = rs.getInt(1);
+				int o_no = rs.getInt(2);
+				int depth = rs.getInt(3);
+				
+				result = new BoardVo();
+				result.setGroupNo(g_no);
+				result.setOrderNo(o_no);
+				result.setDepth(depth);
+				
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	public boolean comment(BoardVo vo) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		updateONO(vo);
+		try {
+			conn = getConnection();
+			String sql = "insert into board "
+					+ "values (null, ?, ?, ?, 0,?,?,?, now())";
+
+			pstmt = conn.prepareStatement(sql);
+			System.out.println(vo.getDepth()+1);
+			pstmt.setLong(1, vo.getUserNo());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getContents());
+			pstmt.setInt(4, vo.getGroupNo());
+			pstmt.setInt(5, vo.getOrderNo()+1);
+			pstmt.setInt(6, (vo.getDepth()+1));
 			
 			int count = pstmt.executeUpdate();
 			result = count == 1;
@@ -348,5 +451,88 @@ public class BoardDao {
 		}
 
 		return result;
+	}
+	
+	public boolean updateONO(BoardVo vo) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			String sql = " update board set " 
+					+ "o_no = o_no + 1"
+					+ " where o_no > ?"
+					+ " and g_no = ?";
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, vo.getOrderNo());
+			pstmt.setInt(2, vo.getGroupNo());
+			System.out.println("[update]" + vo.toString());
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+
+		} catch (
+
+		SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+
+	public int CountList() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num = 1;
+		String no = null;
+		try {
+			conn = getConnection();
+
+			String sql = "select count(*) from board";
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				no = rs.getString(1);
+			if(no!= null){
+				num = Integer.parseInt(no);
+			}else {
+				num = 1;
+			}
+			return num;
+			
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return 1;
 	}
 }

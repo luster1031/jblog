@@ -13,25 +13,30 @@ import com.poscoict.mysite.vo.UserVo;
 import com.poscoict.web.mvc.Action;
 import com.poscoict.web.util.MvcUtil;
 
-public class deleteAction implements Action {
+public class commenAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int g_no = Integer.parseInt(request.getParameter("g_no"));
+		int o_no = Integer.parseInt(request.getParameter("o_no"));
+		int depth = Integer.parseInt(request.getParameter("depth"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
 		HttpSession session = request.getSession();
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			MvcUtil.redirect(request.getContextPath() + "/user?a=loginform ", request, response);
-			return; 
-		}
-		
-		long no = Long.parseLong(request.getParameter("no"));
 		
 		BoardVo vo = new BoardVo();
-		vo.setNo(no);
+		vo.setGroupNo(g_no);
+		vo.setOrderNo(o_no);
+		vo.setDepth(depth);
+		vo.setTitle(title);
+		vo.setContents(content);
+		vo.setUserName(authUser.getName());
 		vo.setUserNo(authUser.getNo());
 		
-		new BoardDao().delete(vo);
-		MvcUtil.redirect(request.getContextPath() + "/board", request, response);
+		new BoardDao().comment(vo);
+		System.out.println(vo.toString());
+		MvcUtil.redirect(request.getContextPath()+"/board", request, response);
 	}
 
 }

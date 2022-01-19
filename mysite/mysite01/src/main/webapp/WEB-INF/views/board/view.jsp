@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%pageContext.setAttribute("newline", "\n");%>
+<%
+pageContext.setAttribute("newline", "\n");
+%>
 <!DOCTYPE html>
 
 <html>
@@ -37,16 +39,34 @@
 				</table>
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath }/board">글목록</a>
-					<!--  글 쓴 사람이 아니면 수정 못 하게 -->
+
 					<c:choose>
 						<c:when test="${authUser.name eq vo.userName}">
-							<a href="${pageContext.request.contextPath }/board?a=updateform&no=${vo.no}">글수정</a>
-						</c:when>
-						<c:when test="${authUser.name != null }">
-							<a href="">답글 달기</a>
+							<a
+								href="${pageContext.request.contextPath }/board?a=updateform&no=${vo.no}">글수정</a>
 						</c:when>
 					</c:choose>
+					<c:choose>
+						<c:when test="${authUser.name != null }">
+							<a
+								href="${pageContext.request.contextPath }/board?a=commentform&no=${vo.no}">답글 </a>
+						</c:when>
+					</c:choose>
+
+					<form name="modify" method="post"
+						action="${pageContext.request.contextPath }/board?a=comment">
+						<input type="hidden" name="g_no" value="${vo.groupNo}" /> <input
+							type="hidden" name="o_no" value="${vo.orderNo}" /> <input
+							type="hidden" name="depth" value="${vo.depth}" />
+						<c:choose>
+							<c:when test="${authUser.name != null }">
+
+								<input type="submit" value="답글 달기">
+							</c:when>
+						</c:choose>
+					</form>
 				</div>
+
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
