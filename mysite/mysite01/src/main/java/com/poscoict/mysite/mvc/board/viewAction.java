@@ -19,14 +19,12 @@ public class viewAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long no = Long.parseLong(request.getParameter("no"));
-		System.out.println(no.toString());
 		
 		// 쿠키 읽기
 		Cookie[] cookies = request.getCookies();
 		boolean check =true;
 		if (cookies != null && cookies.length > 0) {
 			for (Cookie cookie : cookies) {
-				System.out.println(cookie.getName());
 				if (no.toString().equals(cookie.getName())) {
 					check =false;
 					break;

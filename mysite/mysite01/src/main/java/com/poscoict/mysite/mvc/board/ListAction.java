@@ -40,7 +40,7 @@ public class ListAction implements Action {
 		if (endPage > totalPage) {
 			endPage = totalPage;
 		}
-		
+
 		int prePage = startPage - 1; // 이전 페이징
 		HashMap<String, Integer> m = new HashMap<String, Integer>();
 		m.put("pageCount", pageCount);
@@ -52,10 +52,16 @@ public class ListAction implements Action {
 		m.put("prePage", prePage);
 		m.put("nextPage", nextPage);
 		m.put("totalList", count);
-		m.put("startnum", ((totalPage- currentPage)+1 )* listCount);
+		m.put("startnum", ((totalPage - currentPage) + 1) * listCount);
 
-		System.out.println(m.toString());
-		List<BoardVo> list = new BoardDao().findAll(currentPage - 1, listCount);
+		String input;
+		if (request.getParameter("kwd") == null) {
+			input = "";
+		} else {
+			input = "\\" + request.getParameter("kwd");
+			
+		}
+		List<BoardVo> list = new BoardDao().findAll(currentPage - 1, listCount, input);
 
 		request.setAttribute("m", m);
 		request.setAttribute("list", list);
