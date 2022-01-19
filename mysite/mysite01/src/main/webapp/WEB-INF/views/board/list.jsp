@@ -30,10 +30,12 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-
+					<c:set var = "j" value= "-1"/>
 					<c:forEach items="${list }" var="vo">
+					<c:set var = "j" value="${j+1 }"/>
+					<c:set var = "i" value ="${m.startnum -j}"/>
 						<tr>
-							<td>${vo.no }</td>
+							<td>${i }</td>
 							<td style="text-align: left; padding-left:${(vo.depth-1)*20 }px">
 								<c:choose>
 									<c:when test="${vo.depth > 1}">
@@ -45,10 +47,9 @@
 								href="${pageContext.servletContext.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a>
 							</td>
 							<td>${vo.userName }</td>
-							<td>${vo.hit }</td>
+							<td>${vo.hit}</td>
 							<td>${vo.regDate }</td>
 							<!-- 글 쓴 사람이 아니면 삭제 못 하게 -->
-
 							<c:choose>
 								<c:when test="${authUser.no eq vo.userNo}">
 									<td><a
