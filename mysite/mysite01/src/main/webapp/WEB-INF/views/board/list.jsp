@@ -15,11 +15,12 @@
 <body>
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
+
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="" method="post">
-					<input type="text" id="kwd" name="kwd" value=""> <input
-						type="submit" value="찾기">
+					<input type="text" id="kwd" name="kwd" value="${param.kwd }">
+					<input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
 					<tr>
@@ -30,10 +31,10 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-					<c:set var = "j" value= "-1"/>
+					<c:set var="j" value="-1" />
 					<c:forEach items="${list }" var="vo">
-					<c:set var = "j" value="${j+1 }"/>
-					<c:set var = "i" value ="${m.startnum -j}"/>
+						<c:set var="j" value="${j+1 }" />
+						<c:set var="i" value="${m.startnum -j}" />
 						<tr>
 							<td>${i }</td>
 							<td style="text-align: left; padding-left:${(vo.depth-1)*20 }px">
@@ -66,7 +67,6 @@
 						</tr>
 					</c:forEach>
 				</table>
-
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
@@ -85,11 +85,23 @@
 									<c:set var="select" value=''></c:set>
 								</c:otherwise>
 							</c:choose>
-							<li ${select }><a href="${pageContext.servletContext.contextPath }/board?page=${num }">${num }</a></li>
+							
+							
+							<c:choose>
+								<c:when test="${m.serach == 1}">
+									<c:set var="search" value="&kwd2=${param.kwd }" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="search" value="" />
+								</c:otherwise>
+							</c:choose>
+							<li ${select }><a
+								href="${pageContext.servletContext.contextPath }/board?page=${num }${search}">${num }</a></li>
 						</c:forEach>
 						<c:choose>
 							<c:when test="${m.totalPage != m.endPage}">
-								<li><a href="${pageContext.servletContext.contextPath }/board?page=${m.nextPage }">▶</a></li>
+								<li><a
+									href="${pageContext.servletContext.contextPath }/board?page=${m.nextPage }">▶</a></li>
 							</c:when>
 						</c:choose>
 					</ul>

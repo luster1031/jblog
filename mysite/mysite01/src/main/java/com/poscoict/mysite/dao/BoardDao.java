@@ -12,7 +12,7 @@ import com.poscoict.mysite.vo.BoardVo;
 
 public class BoardDao {
 
-	public List<BoardVo> findAll(int start, int count, String input) {
+	public List<BoardVo> findAll(String limit, String input) {
 		List<BoardVo> list = new ArrayList<>();
 
 		Connection conn = null;
@@ -26,11 +26,10 @@ public class BoardDao {
 					+ " where a.no = b.user_no"
 					+ "  and b.title like '%" +input+ "%'"
 					+ " order by b.g_no desc,  b.o_no asc, b.depth asc" 
-					+ " LIMIT ?, ?";
+					+ limit;
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start * count);
-			pstmt.setInt(2, count);
+						
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
