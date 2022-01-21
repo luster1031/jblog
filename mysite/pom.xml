@@ -75,6 +75,6 @@
 	</build>
 
 	<modules>
-		<module>mysite01</module>
+		<module>mysite02</module>
 	</modules>
 </project>

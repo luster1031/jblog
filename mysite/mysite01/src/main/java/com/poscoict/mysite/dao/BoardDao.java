@@ -27,7 +27,7 @@ public class BoardDao {
 					+ "  and b.title like '%" +input+ "%'"
 					+ " order by b.g_no desc,  b.o_no asc, b.depth asc" 
 					+ limit;
-
+			
 			pstmt = conn.prepareStatement(sql);
 						
 			rs = pstmt.executeQuery();

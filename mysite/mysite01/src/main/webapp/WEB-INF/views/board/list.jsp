@@ -19,7 +19,7 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="" method="post">
-					<input type="text" id="kwd" name="kwd" value="${param.kwd }">
+					<input type="text" id="kwd" name="kwd" value="${kwd }">
 					<input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
@@ -89,7 +89,7 @@
 							
 							<c:choose>
 								<c:when test="${m.serach == 1}">
-									<c:set var="search" value="&kwd2=${param.kwd }" />
+									<c:set var="search" value="&kwd2=${kwd }" />
 								</c:when>
 								<c:otherwise>
 									<c:set var="search" value="" />

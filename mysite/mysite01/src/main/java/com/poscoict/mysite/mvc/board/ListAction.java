@@ -24,7 +24,7 @@ public class ListAction implements Action {
 		int nextPage = -1; // -1이면 next가 없다.
 		
 		int count = 0;	//	리스트 개수
-		int totalPage = 0; // 총 페이지
+		int totalPage = 1; // 총 페이지
 		int endPage = 0; // 끝나는 페이징
 		HashMap<String, Integer> m = new HashMap<String, Integer>();
 		
@@ -53,9 +53,11 @@ public class ListAction implements Action {
 			
 			list = new BoardDao().findAll("", "\\" + input);
 			count = list.size();
+			System.out.println("count " + count );
 			m.put("serach", 1);
 		}
 		System.out.println(input);
+		
 		totalPage = ((int) Math.ceil(count / (double) listCount)); 
 		endPage = ((int) Math.ceil(totalPage / (double) pageCount));
 		limit = " LIMIT "+  (currentPage - 1) + " , " + listCount;
@@ -91,6 +93,7 @@ public class ListAction implements Action {
 		request.setAttribute("m", m);
 		request.setAttribute("list", list);
 		request.setAttribute("kwd", input);
+		System.out.println("키워드 "+ input);
 		MvcUtil.forward("board/list", request, response);
 	}
 
