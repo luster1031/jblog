@@ -120,3 +120,53 @@
          out.write("<h1>Hello </h1>");
       }
    ```
+ 
+--------  
++ 2022.01.21
+
+
++ @RequestMapping : 클래스 (타입) 단독 매핑
+
+> Guestbook Controller.java
+
+<br>
+   
++ @RequestMapping : 메소드 단독 매핑
+
+> BoardController.java
+
++ @PathVariable("no") Long boardNo : no자리에 들어오는 것
+
+```
+@ResponseBody
+	@RequestMapping("board/view/{no}")
+	public String view(@PathVariable("no") Long boardNo) {
+		return "BoardController.view("+ boardNo + ")";
+	}
+```
+
+<br>
+
+
++ @RequestMapping : 클래스(타입) + 메소드(핸들러)
+
+> UserController.java
+
++ @RequestParam("n") -> 요청파라미터 n이 들어오면 값을 string name으로 전달
+
++ 매개변수 안 들어올 경우 설정
+
+```
+@RequestParam(value ="n", required=true , defaultValue="") String name
+```
+
+
+------
+@Controller
+@Service
+@Repository
+
+@Component
+classs Mailer{
+	
+}
