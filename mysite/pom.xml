@@ -6,18 +6,20 @@
 	<artifactId>mysite</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 		<project.reporting.outputEncodnig>utf-8</project.reporting.outputEncodnig>
-	</properties>
-
+	</properties>		
+	
 	<dependencies>
+		<!-- JSTL -->	
 		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
 		</dependency>
+	
 		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -30,16 +32,16 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>
 			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-
+		</dependency>			
+	</dependencies>	
+	
 	<build>
 		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 				<excludes>
-					<exclude>**/*/.java</exclude>
+					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -58,7 +60,6 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.2.0</version>
 				<configuration>
-
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -73,9 +74,11 @@
 			</plugin>
 		</plugins>
 	</build>
-
+		
 	<modules>
 		<module>mysite02</module>
 		<module>mysite03</module>
 	</modules>
+	
+	
 </project>
