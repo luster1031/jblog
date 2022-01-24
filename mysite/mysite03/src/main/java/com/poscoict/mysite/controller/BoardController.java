@@ -30,13 +30,18 @@ public class BoardController {
 	}
 
 	@RequestMapping("/writeform")
-	public String writeform() {
+	public String writeform(HttpSession session) {
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if (authUser == null) {
+			return "user/login";
+		}
 		return "board/write";
 	}
 
-	@RequestMapping("deletepost")
-	public String delete(@RequestParam(value = "no", required = true, defaultValue = "") Long no, HttpSession session) {
-		BoardVo authUser = (BoardVo) session.getAttribute("authUser");
+	@RequestMapping("/deletepost")
+	public String delete(@RequestParam(value = "no", required = true, defaultValue = "") Long no
+			, HttpSession session) {
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser == null) {
 			return "user/login";
 		}
@@ -56,7 +61,9 @@ public class BoardController {
 	}
 
 	@RequestMapping("/view")
-	public String viewform(@RequestParam(value = "no", required = true, defaultValue = "") Long no, Model model) {
+	public String viewform(@RequestParam(value = "no", required = true, defaultValue = "") Long no
+			, Model model
+			, HttpSession session) {
 		BoardVo vo = boardService.getContents(no);
 		model.addAttribute("vo", vo);
 		return "board/view";
