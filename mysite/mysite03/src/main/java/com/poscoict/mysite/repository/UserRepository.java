@@ -172,30 +172,22 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 			String sql = "";
-			System.out.println(vo.getPassword());
-			if (vo.getPassword().equals("")) {
-				sql = " update user set " 
-						+ "name = ?, gender = ?, email = ? "
-						+ "where no = ?";
-
+			if ("".equals(vo.getPassword()) || vo.getPassword() == null) {
+				sql = " update user set " + "name = ?, gender = ? " + "where no = ?";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getName());
 				pstmt.setString(2, vo.getGender());
-				pstmt.setString(3, vo.getEmail());
-				pstmt.setLong(4, vo.getNo());
+				pstmt.setLong(3, vo.getNo());
 
 			} else {
-				sql = "update user set " 
-						+ "name = ?, gender = ?, password = ?, email = ? "
-						+ "where no =?";
+				sql = "update user set " + "name = ?, gender = ?, password = ? " + "where no =?";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getName());
 				pstmt.setString(2, vo.getGender());
 				pstmt.setString(3, vo.getPassword());
-				pstmt.setString(4, vo.getEmail());
-				pstmt.setLong(5, vo.getNo());
+				pstmt.setLong(4, vo.getNo());
 
 			}
 

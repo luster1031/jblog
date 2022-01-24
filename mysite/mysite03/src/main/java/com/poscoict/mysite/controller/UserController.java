@@ -79,9 +79,19 @@ public class UserController {
 		model.addAttribute("userVo", userVo);
 		return "/user/update";
 	}
+	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update() {
-		return "/user/update";
+	public String update(HttpSession session, UserVo userVo) {
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		userVo.setNo(authUser.getNo());
+		userService.updateUser(userVo);
+		authUser = userService.getUser(authUser.getNo());
+		session.setAttribute("authUser", authUser);
+		System.out.println(userVo);
+		return "redirect:/";
 	}
 	
 }
