@@ -42,3 +42,37 @@
 
 
 ### exception
+
++ AOP기술
+	+ 모든 에러가 여기로 가는 것 
+	
+> spring-servlet.xml 추가해줘야함
+
+```
+<context:component-scan
+		base-package="com.poscoict.mysite.controller, com.poscoict.mysite.exception" />
+```
+
+> GlobalException.java
+```
+@ControllerAdvice
+public class GlobalExceptionHandler {
+	@ExceptionHandler(Exception.class)
+	public String ExceptionHandler(Model model, Exception e) {
+		
+		//	1. 로깅
+		//  errors가 가지고 있는 버퍼 안에 에러 내용 적혀 있음
+		StringWriter errors = new StringWriter();
+		e.printStackTrace(new PrintWriter(errors)); 
+		System.out.println(errors.toString());
+		
+		model.addAttribute("exception", errors.toString());
+		
+		//	2. 사과 페이지 (HTML 응답, 정상 종료)
+		return "error/exception";
+		
+		
+	}
+}
+```
+    
