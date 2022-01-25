@@ -37,11 +37,8 @@
 		<if test="input2 !=null and ''!=input2">
 			${input2}
 		</if>
-		<![CDATA[
-			  and b.title  
-		]]>
 		<if test="input !=null and ''!=input">
-			like '%${input}%'
+			and b.title like '%${input}%'
 		</if>
 		<![CDATA[
 			  order by b.g_no desc,  b.o_no asc, b.depth asc ${limit}
