@@ -32,12 +32,15 @@
 	+ EL & JSTL 연습, scope 학습
 
 # mysite
-   + mysite02
+   + [mysite02](https://github.com/luster1031/JAVA_Expert_courses_Practice)
       +  servlet + jsp(mvc)
-   + mysite03
+   + [mysite03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/mysite/mysite03)
+      + spring mvc (웹 어플리케이션 만들기)
    + mysite04
    + mysite04
    + mysite05 : spring mvc -> war
    + mysite06 : spring boot -> jar, war
 
 # spring
++ [java-study](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/java-study)
+   +  예외
