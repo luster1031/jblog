@@ -46,6 +46,7 @@ public class BoardController {
 			return "user/login";
 		}
 		boardService.deleteContents(no, authUser.getNo());
+		
 		return "redirect:/board";
 	}
 
@@ -76,8 +77,10 @@ public class BoardController {
 		if (authUser == null) {
 			return "user/login";
 		}
-		BoardVo vo = boardService.getContents(no, authUser.getNo());
-		model.addAttribute("vo", vo);
+		if(boardService.getTotalCount() != 0) {
+			BoardVo vo = boardService.getContents(no, authUser.getNo());
+			model.addAttribute("vo", vo);
+		}
 		return "board/modify";
 	}
 
@@ -93,7 +96,7 @@ public class BoardController {
 		return "redirect:/board/view?no=" + no;
 	}
 
-	@RequestMapping("comment")
+	@RequestMapping("/comment")
 	public String commnet(BoardVo vo, HttpSession session,
 			@RequestParam(value = "g_no", required = true, defaultValue = "") Integer g_no,
 			@RequestParam(value = "o_no", required = true, defaultValue = "") Integer o_no,

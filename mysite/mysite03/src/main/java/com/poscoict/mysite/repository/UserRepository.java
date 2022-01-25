@@ -41,8 +41,7 @@ public class UserRepository {
 	}
 
 
-	public boolean updateByNo(UserVo vo) {
-		int count = sqlSession.update("user.update", vo);
-		return count == 1;
+	public int updateByNo(UserVo vo) {
+		return sqlSession.update("user.update", vo);
 	}
 }

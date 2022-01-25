@@ -187,8 +187,6 @@ dataSource.getConnection();
 
 6. UserRepository.java
 
-```
-```
 
 7. typeAlias
 
@@ -210,3 +208,4 @@ dataSource.getConnection();
 		<typeAlias type="com.poscoict.mysite.vo.UserVo" alias="uservo" />
     	</typeAliases>
 ```
+

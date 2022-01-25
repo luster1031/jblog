@@ -20,30 +20,33 @@ public class BoardService {
 		if (vo.getGroupNo() != null) {
 			System.out.println("답글 : " + vo.toString());
 			return increaseGroupOrderNO(vo);
-		}
-		else
-			return boardRepository.insert(vo);
+		} else
+			return boardRepository.insert(vo) == 1;
 	}
+
 	public BoardVo getComment(Long no) {
 		return boardRepository.findByNO(no);
 	}
-	
+
 	// 게시물 글보기
 	public BoardVo getContents(Long no) {
 		BoardVo vo = boardRepository.view(no);
 		boardRepository.setHit(no);
 		return vo;
 	}
+	//	사이즈
+	public long getTotalCount() {
+		return boardRepository.getTotalCount("");
+	}
 
 	// 글 수정 하기 전,
 	public BoardVo getContents(Long no, Long userNo) {
 		return boardRepository.updateSerach(no, userNo);
 	}
-	
 
 	// 글 수정
 	public Boolean updateContents(BoardVo vo) {
-		return boardRepository.update(vo);
+		return boardRepository.update(vo) == 1;
 	}
 
 	// 글 삭제
@@ -51,7 +54,7 @@ public class BoardService {
 		BoardVo vo = new BoardVo();
 		vo.setNo(no);
 		vo.setUserNo(userNo);
-		return boardRepository.deletePost(vo);
+		return boardRepository.deletePost(vo)==1;
 
 	}
 
@@ -75,7 +78,7 @@ public class BoardService {
 		if ("".equals(keyworld) && "".equals(keyworld2)) { // 키워드 검색 아니 경우
 			input = "";
 			input2 = "";
-			count = boardRepository.CountList();
+			count = boardRepository.getTotalCount("");
 			System.out.println("리스트 검색 아닌ㄴ 경우 :  " + count);
 			map.put("serach", 0);
 		} else { // 키워드 검색인 경우
@@ -86,9 +89,10 @@ public class BoardService {
 				input = keyworld2;
 				System.out.println("키워드ㅌ");
 			}
-			input2 = " and reg_date != '0000-00-00 00:00:00'";
-			list = boardRepository.findAll("", "\\" + "\\" + input, input2);
+			input2 = " and reg_date != \'0000-00-00 00:00:00\'";
+			list = boardRepository.findAll("", input, input2);
 			count = list.size();
+			System.out.println("count : " + count);
 			map.put("serach", 1);
 		}
 
@@ -105,7 +109,8 @@ public class BoardService {
 			limit = " LIMIT " + (currentPage - 1) * listCount + " , " + endcount;
 		}
 		list = boardRepository.findAll(limit, input, input2);
-
+		System.out.println("list : \n" + list.toString());
+		
 		if (totalPage <= pageCount) {
 			endPage = totalPage;
 			startPage = 1;
@@ -139,7 +144,7 @@ public class BoardService {
 
 	// 댓글 달기
 	private boolean increaseGroupOrderNO(BoardVo vo) {
-		return boardRepository.comment(vo);
+		return boardRepository.comment(vo)==1;
 	}
 
 }

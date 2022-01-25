@@ -27,7 +27,9 @@ public class GuestbookController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(GuestbookVo vo) {
+		System.out.println("guestbookvo befor : " + vo);
 		guestbookService.addMessage(vo);
+		System.out.println("guestbookvo after : " + vo);
 		return "redirect:/guestbook";
 	}
 	
@@ -49,6 +51,7 @@ public class GuestbookController {
 		System.out.println(no);
 		model.addAttribute("no",no);
 		guestbookService.deleteMessage(no, passwd);
+		System.out.println("Controller");
 		return "redirect:/guestbook";
 	}
 }
