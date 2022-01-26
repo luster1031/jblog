@@ -92,10 +92,10 @@
 		]]>
 	</select>
 
-	<select id="maxGroupno">
-	<![CDATA[
-		select max(g_no)+1 from board
-	]]>
+	<select id="maxGroupno" resultType="int">
+		<![CDATA[
+			select max(g_no)+1 from board
+		]]>
 
 	</select>
 
@@ -107,7 +107,9 @@
 
 	<select id="findByNO" parameterType="long" resultType="boardvo">
 		<![CDATA[
-			select g_no, o_no, depth from board where no=#{_parameter}
+			select g_no as groupNo
+			, o_no as orderNo
+			, depth from board where no=#{_parameter}
 		]]>
 	</select>
 
@@ -124,9 +126,9 @@
 	</update>
 	
 	<select id="CountList">
-	<![CDATA[
-			select count(*) from board
-		]]>
+		<![CDATA[
+				select count(*) from board
+			]]>
 	</select>
 	
 	<update id="deletePost" parameterType="boardvo">

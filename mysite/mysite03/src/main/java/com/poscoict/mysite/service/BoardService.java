@@ -17,15 +17,19 @@ public class BoardService {
 
 	// 새글, 댓글 달기
 	public boolean addContents(BoardVo vo) {
+		System.out.println("[addContents] : "+ vo.toString());
 		if (vo.getGroupNo() != null) {
 			System.out.println("답글 : " + vo.toString());
 			return increaseGroupOrderNO(vo);
-		} else
+		} else {
 			return boardRepository.insert(vo) == 1;
+		}
 	}
 
 	public BoardVo getComment(Long no) {
-		return boardRepository.findByNO(no);
+		BoardVo vo = boardRepository.findByNO(no);
+		System.out.println("[getComment] "+ vo);
+		return vo;
 	}
 
 	// 게시물 글보기

@@ -34,12 +34,11 @@ public class BoardRepository {
 	public int insert(BoardVo vo) {
 		int g_no = maxGroupno();
 		vo.setGroupNo(g_no);
-		System.out.println(vo.toString());
 		return sqlSession.insert("board.insert",vo);
 	}
 
-	private int maxGroupno() {
-		return sqlSession.insert("board.maxGroupno");
+	public int maxGroupno() {
+		return sqlSession.selectOne("board.maxGroupno");
 	}
 
 	public int delete(BoardVo vo) {
@@ -75,11 +74,13 @@ public class BoardRepository {
 	}
 
 	public BoardVo findByNO(Long no) {
+		System.out.println("[findByNo] : "+ no);
 		return sqlSession.selectOne("board.findByNO",no);
 	}
 
 	public int comment(BoardVo vo) {
 		updateONO(vo);
+		System.out.println("update : "+ vo.toString());
 		return sqlSession.insert("board.comment",vo);
 	}
 

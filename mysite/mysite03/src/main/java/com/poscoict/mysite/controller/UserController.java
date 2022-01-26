@@ -6,11 +6,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poscoict.mysite.security.Auth;
+import com.poscoict.mysite.security.AuthUser;
 import com.poscoict.mysite.service.UserService;
 import com.poscoict.mysite.vo.UserVo;
 
@@ -37,43 +37,14 @@ public class UserController {
 		return "user/joinsuccess";
 	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value="/login")
 	public String login() {
 		return "user/login";
 	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(
-			HttpSession session
-			, @RequestParam(value="email", required = true, defaultValue = "") String email
-			, @RequestParam(value="password", required = true, defaultValue = "") String password
-			, Model model) {
-		UserVo authUser = userService.getUser(email, password);
-		if(authUser==null) {
-			model.addAttribute("result" , "fail");
-			model.addAttribute("email" , email);
-			return "user/login";
-		}
-		/*	인증 처리	*/
-		session.setAttribute("authUser", authUser);
-		return "redirect:/";
-	}
-	
-	@RequestMapping(value="/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("authUser");
-		session.invalidate();
-		
-		return "redirect:/";
-	}
-	
+	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(HttpSession session, Model model) {
-		//	접근 제어 (access contorller)
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
+	public String update(@AuthUser UserVo authUser, Model model) {
 		
 		Long userNO = authUser.getNo();
 		UserVo userVo = userService.getUser(userNO);
@@ -81,16 +52,13 @@ public class UserController {
 		return "/user/update";
 	}
 	
+	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(HttpSession session, UserVo userVo) {
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
+	public String update(@AuthUser UserVo authUser, UserVo userVo) {
+		
 		userVo.setNo(authUser.getNo());
 		userService.updateUser(userVo);
 		authUser = userService.getUser(authUser.getNo());
-		session.setAttribute("authUser", authUser);
 		System.out.println(userVo);
 		return "redirect:/";
 	}
