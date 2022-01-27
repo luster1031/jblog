@@ -11,7 +11,11 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
-
+	
+	<!-- proxy객체를 만드는 것 -->
+	<!-- auto proxy -->
+	<aop:aspectj-autoproxy />
+	
 	<!-- Connection Pool DataSource -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
@@ -35,7 +39,8 @@
 
 	<!-- MyBatis SqlSessionTemplate -->
 	<!-- 생성자 사용하는 DAO -->
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
@@ -44,7 +49,7 @@
 	<!-- annotation을 찍어 놓을 께 클래스를 찾아라. 위치는 여기서 부터 시작해 (base-package) -->
 	<context:annotation-config />
 	<context:component-scan
-		base-package="com.poscoict.mysite.service, com.poscoict.mysite.repository">
+		base-package="com.poscoict.mysite.service, com.poscoict.mysite.repository, com.poscoict.mysite.aspect">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
