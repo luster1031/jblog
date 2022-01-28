@@ -47,7 +47,7 @@
 
 	<insert id="insert" parameterType="boardvo">
 		<![CDATA[
-			 insert into board values (null, #{userNo}, #{title}, #{contents}, 0,#{groupNo},1,1, now())
+			 insert into board values (null, #{title}, #{contents}, 0,#{groupNo},1,1, now(), #{userNo})
 		]]>
 		<selectKey keyProperty="no" resultType="long" order="AFTER">
 			<!-- 지금 들어간 key 번호 알아내서 넘어오는 vo에 setno해라 -->

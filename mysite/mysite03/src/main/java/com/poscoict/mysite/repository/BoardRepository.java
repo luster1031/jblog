@@ -32,13 +32,19 @@ public class BoardRepository {
 
 
 	public int insert(BoardVo vo) {
+		
 		int g_no = maxGroupno();
+		
 		vo.setGroupNo(g_no);
 		return sqlSession.insert("board.insert",vo);
 	}
 
 	public int maxGroupno() {
-		return sqlSession.selectOne("board.maxGroupno");
+		if(sqlSession.selectOne("board.maxGroupno")==null) {
+			return 1;
+		}else {
+			return sqlSession.selectOne("board.maxGroupno");
+		}
 	}
 
 	public int delete(BoardVo vo) {
