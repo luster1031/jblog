@@ -57,7 +57,7 @@ public class GuestbookDAO {
 		return list;
 	}
 	
-	public boolean delete(int no, String password) {
+	public boolean delete(Long no, String password) {
 		Connection conn = connectionDB();
 		PreparedStatement ps = null;
 		int result = 0;
@@ -116,19 +116,23 @@ public class GuestbookDAO {
 		return result==1;
 	}
 	
-	public Connection connectionDB() {
-		Connection conn = null; 
+	private Connection connectionDB(){
+		Connection conn = null;
 		try {
 			// 1. JDBC 드라이버 로딩
-						Class.forName("com.mysql.cj.jdbc.Driver");
-									
+//			Class.forName("com.mysql.cj.jdbc.Driver"); -> mysql
+			Class.forName("org.mariadb.jdbc.Driver");
+					
+			
 			//	2. 연결하기
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
+			String url = "jdbc:mysql://192.168.0.69:3307/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
+//			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC"; -> mysql
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
+			
 		}catch(ClassNotFoundException e) {
-			System.out.println("드라이브 에러 : "+e);
+			System.out.println("드라이버 로딩 실패 : " + e);
 		}catch(SQLException e) {
-			System.out.println("sql 에러 : " + e);
+			System.out.println("error : " +e);
 		}
 		return conn;
 	}

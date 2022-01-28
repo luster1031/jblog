@@ -114,10 +114,13 @@ public class EmaillistDAO {
 		Connection conn = null;
 		try {
 			// 1. JDBC 드라이버 로딩
-			Class.forName("com.mysql.cj.jdbc.Driver");
-						
+//			Class.forName("com.mysql.cj.jdbc.Driver"); -> mysql
+			Class.forName("org.mariadb.jdbc.Driver");
+					
+			
 			//	2. 연결하기
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
+			String url = "jdbc:mysql://192.168.0.69:3307/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
+//			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC"; -> mysql
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 			
 		}catch(ClassNotFoundException e) {
