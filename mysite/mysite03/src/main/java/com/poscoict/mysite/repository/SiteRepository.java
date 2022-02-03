@@ -11,8 +11,8 @@ public class SiteRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public int updateSite(SiteVo siteVo) {
-		return sqlSession.update("site.update", siteVo);
+	public boolean updateSite(SiteVo siteVo) {
+		return sqlSession.update("site.update", siteVo)==1;
 	}
 
 	public SiteVo find() {

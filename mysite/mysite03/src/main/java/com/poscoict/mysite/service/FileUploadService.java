@@ -9,8 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.poscoict.mysite.repository.SiteRepository;
+import com.poscoict.mysite.vo.SiteVo;
+
 @Service
 public class FileUploadService {
+	@Autowired
+	private SiteRepository siteRepository;
 	
 	private static String SAVE_PATH ="/upload-images";
 	private static String URL_BASE = "/images";
@@ -22,7 +27,8 @@ public class FileUploadService {
 			//	파일이 있는ㄴ지 없는지 확인
 			if(multipartFile.isEmpty()) {
 				System.out.println("파일 없음 "  + multipartFile);
-				return url;
+				SiteVo sitevo = siteRepository.find();
+				return sitevo.getProfile();
 			}
 			
 			System.out.println("파일 " + multipartFile);

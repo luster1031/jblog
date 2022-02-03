@@ -1,8 +1,5 @@
 package com.poscoict.mysite.controller;
 
-
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -21,8 +18,6 @@ import com.poscoict.mysite.vo.SiteVo;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	@Autowired
-	private ServletContext servletcontext;
 	
 	@Autowired
 	private SiteService siteService;
@@ -32,18 +27,16 @@ public class AdminController {
 	
 	@RequestMapping({"","/main"})
 	public String main(SiteVo siteVo, Model model) {
-		System.out.println("controller-main " + siteVo.toString());
-		model.addAttribute("siteVo", siteVo);
 		return "admin/main";	
 	}
 	
 	@RequestMapping(value="main/update", method=RequestMethod.POST)
 	public String update(SiteVo siteVo
 			,@RequestParam(value="file1") MultipartFile multipartFile) {
+
 		String url = fileUploadService.restore(multipartFile);
 		siteVo.setProfile(url);
-		servletcontext.setAttribute("site", siteVo);
-		System.out.println("update-- site" + siteVo.toString());
+		System.out.println("----update-----" + siteVo.toString());
 		siteService.updateSite(siteVo);
 		return "redirect:/main"; 
 	 }

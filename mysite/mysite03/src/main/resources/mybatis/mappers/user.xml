@@ -6,13 +6,13 @@
 		<!-- map이면, key이름 넣어주면 됨 -->
 		<![CDATA[
 		
-			select no, name from user where email=#{e} and password=#{passwd}
+			select no, name, role from user where email=#{e} and password=#{passwd}
 		]]>
 	</select>
 
 	<select id="findByNo" parameterType="long" resultType="uservo">
 		<![CDATA[
-			select name, email, password, gender from user where no=#{no}
+			select name, email, password, gender, role from user where no=#{no}
 		]]>
 	</select>
 

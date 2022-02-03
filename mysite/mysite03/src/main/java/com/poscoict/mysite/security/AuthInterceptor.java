@@ -10,20 +10,15 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.poscoict.mysite.repository.SiteRepository;
+import com.poscoict.mysite.repository.UserRepository;
 import com.poscoict.mysite.vo.SiteVo;
 import com.poscoict.mysite.vo.UserVo;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
-	@Autowired
-	private SiteRepository siteRepository;
-
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		SiteVo vo = siteRepository.find();
-		request.getServletContext().setAttribute("site", vo);
-		System.out.println("logininterceptor" + vo.toString());
-		System.out.println("preHandle");
 		// 1. handler 정보 - handler
 		// handler 종류 확인 - 이미지 파일,, 등등
 		if (handler instanceof HandlerMethod == false) {
@@ -40,6 +35,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// 4. Handler Method @Auth가 없다면 Type에 있는 지 확인(과제)
 		if (auth == null) {
 			// 클래스로 올라가서 찾아봐야 한다.
+			auth = handlerMethod.getBeanType().getAnnotation(Auth.class);
 		}
 
 		// 5. type과 method에 @Auth가 적용이 안 되어 있는 경우
@@ -64,13 +60,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		// authInterceptor role처리
-		String role = auth.role().toString(); // -> role이 빠짐
+		String role = authUser.getRole();
 		System.out.println("[role] : " + role);
+		System.out.println("[authUser] : " + authUser.toString());
+		
 		if ("ADMIN".equals(role)) {
-			if ("root".equals(authUser.getName()) == false) {
-				response.sendRedirect(request.getContextPath() + "/user/login");
-				return false;
-			}
+			return true;
+		}
+		if(!auth.role().equals(authUser.getRole())) {
+			response.sendRedirect(request.getContextPath());
+			return false;
 		}
 		// 6. 인증 확인 --> controller의 handler(methode) 실행
 		return true;

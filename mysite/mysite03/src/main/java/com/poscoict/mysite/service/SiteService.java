@@ -1,5 +1,7 @@
 package com.poscoict.mysite.service;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +12,13 @@ import com.poscoict.mysite.vo.SiteVo;
 public class SiteService {
 	@Autowired
 	private SiteRepository siteRepository;
+	@Autowired
+	private ServletContext servletContext;
 
-	// 메인 페이지 
+	// 메인 페이지
 	public boolean updateSite(SiteVo siteVo) {
-		System.out.println("updatesite- : " + siteVo.toString());
-		return siteRepository.updateSite(siteVo)==1;
+		servletContext.setAttribute("site", siteVo);
+		return siteRepository.updateSite(siteVo);
 	}
 
 	public SiteVo getContents() {
