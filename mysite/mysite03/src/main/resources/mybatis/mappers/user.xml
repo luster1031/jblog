@@ -21,7 +21,7 @@
 		<!-- <,>이런것들 때문에 -->
 		<!-- 필드 이름으로 매핑 -->
 		<![CDATA[
-			insert into user values (null, #{name}, #{email}, #{password}, #{gender}, now())
+			insert into user values (null, #{name}, #{email}, #{password}, #{gender}, now(),'USER')
 		]]>
 	</insert>
 
@@ -53,5 +53,11 @@
 		]]>
 
 	</update>
+	
+	<select id="findrole" parameterType="long" resultType="string">
+	<![CDATA[
+		select role from user where no=#{no}
+	]]>
+	</select>
 </mapper>
 

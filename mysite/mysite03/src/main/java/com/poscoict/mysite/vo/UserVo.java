@@ -13,9 +13,10 @@ public class UserVo {
 	@Length(min=2, max=8)
 	private String name;
 	
+	
 	@NotEmpty
 	@Email
-	@Pattern(regexp="")	// * : 모든 문자열, [0-9],{3},,,^([a-zA-Z0-9_\\-\\.])
+//	@Pattern(regexp="")	// * : 모든 문자열, [0-9],{3},,,^([a-zA-Z0-9_\\-\\.])
 	private String email;
 	
 	@NotEmpty
@@ -24,6 +25,13 @@ public class UserVo {
 
 	private String gender;
 	private String joinDate;
+	private String role;
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public Long getNo() {
 		return no;
 	}
@@ -61,10 +69,11 @@ public class UserVo {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
-				+ gender + ", joinDate=" + joinDate + "]";
+				+ gender + ", joinDate=" + joinDate + ", role=" + role + "]";
 	}
+	
+	
 }

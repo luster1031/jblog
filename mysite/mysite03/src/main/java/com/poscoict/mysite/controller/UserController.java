@@ -46,10 +46,12 @@ public class UserController {
 //			}
 			
 			//model.addAttribute("userVo", userVo); -> ModelAttribute
-			
+			System.out.println(result.toString());
+			System.out.println("join error: "+ vo.toString());
 			model.addAllAttributes(result.getModel());
 			return "user/join";
 		}
+		System.out.println("join error 아님: "+ vo.toString());
 		userService.join(vo);
 		return "redirect:/user/joinsuccess";
 	}

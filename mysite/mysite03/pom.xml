@@ -55,14 +55,14 @@
 
 		<!-- validation -->
 		<dependency>
-		    <groupId>javax.validation</groupId>
-		    <artifactId>validation-api</artifactId>
-		    <version>2.0.1.Final</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
 		</dependency>
 		<dependency>
-		   <groupId>org.hibernate</groupId>
-		   <artifactId>hibernate-validator</artifactId>
-		   <version>6.1.0.Final</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.1.0.Final</version>
 		</dependency>
 
 
@@ -111,6 +111,18 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
+
+		<!-- Common Fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -123,6 +135,17 @@
 				<configuration>
 					<url>http://127.0.0.1:8080/manager/text</url>
 					<path>/mysite03</path>
+					<username>admin</username>
+					<password>manager</password>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<url>http://127.0.0.1:8080/manager/text</url>
+					<path>/fileupload</path>	
 					<username>admin</username>
 					<password>manager</password>
 				</configuration>

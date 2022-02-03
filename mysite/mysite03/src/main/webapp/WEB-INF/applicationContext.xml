@@ -49,7 +49,7 @@
 	<!-- annotation을 찍어 놓을 께 클래스를 찾아라. 위치는 여기서 부터 시작해 (base-package) -->
 	<context:annotation-config />
 	<context:component-scan
-		base-package="com.poscoict.mysite.service, com.poscoict.mysite.repository, com.poscoict.mysite.aspect">
+		base-package="com.poscoict.mysite.service, com.poscoict.mysite.repository, com.poscoict.mysite.aspect, com.poscoict.mysite.service">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"

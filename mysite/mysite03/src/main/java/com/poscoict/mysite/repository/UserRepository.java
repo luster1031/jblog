@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.poscoict.mysite.exception.UserRepositoryException;
+import com.poscoict.mysite.security.Auth;
 import com.poscoict.mysite.vo.UserVo;
 
 @Repository
@@ -43,5 +44,10 @@ public class UserRepository {
 
 	public int updateByNo(UserVo vo) {
 		return sqlSession.update("user.update", vo);
+	}
+
+
+	public String findrole(Long no) {
+		return sqlSession.selectOne("user.findrole", no);
 	}
 }

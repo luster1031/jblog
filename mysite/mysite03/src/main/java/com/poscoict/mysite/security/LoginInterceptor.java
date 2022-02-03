@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.poscoict.mysite.repository.SiteRepository;
 import com.poscoict.mysite.service.UserService;
+import com.poscoict.mysite.vo.SiteVo;
 import com.poscoict.mysite.vo.UserVo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -19,7 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		
 		UserVo authUser = userService.getUser(email, password);
 		if(authUser == null) {
 			request.setAttribute("result", "fail");
