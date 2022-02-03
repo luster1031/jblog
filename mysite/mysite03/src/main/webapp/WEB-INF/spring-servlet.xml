@@ -12,8 +12,8 @@
 	<!-- proxy객체를 만드는 것 -->
 	<!-- auto proxy -->
 	<aop:aspectj-autoproxy />
-	
-	
+
+
 	<!-- Message Converter, Handler Mapping, Validator 생성 및 설정 -->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
@@ -46,6 +46,10 @@
 		</mvc:interceptor>
 
 	</mvc:interceptors>
+	
+	<!-- mvc url-resource mapping -->
+	<mvc:resources mapping="/images/**"
+		location="file:/upload-images/" />
 
 	<!-- ViewResolver -->
 	<bean id="viewResolver"
@@ -54,6 +58,16 @@
 			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 6. MessageSource -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages_ko</value>
+			</list>
+		</property>
 	</bean>
 
 	<context:annotation-config />
