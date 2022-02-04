@@ -77,6 +77,7 @@
 		
 	<modules>
 		<module>mysite01</module>
+		<module>mysite02</module>
 		<module>mysite03</module>
 	</modules>
 	

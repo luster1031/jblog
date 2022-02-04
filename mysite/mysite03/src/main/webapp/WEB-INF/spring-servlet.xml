@@ -38,7 +38,7 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin" />
-			<bean class="com.poscoict.mysite.security.SiteInterceptor" />
+			<bean class="com.poscoict.mysite.interceptor.SiteInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
@@ -50,7 +50,7 @@
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.poscoict.mysite.security.SiteInterceptor" />
+			<bean class="com.poscoict.mysite.interceptor.SiteInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

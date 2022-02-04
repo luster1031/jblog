@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%pageContext.setAttribute("newline", "\n");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 					<img id="profile" src="${pageContext.request.contextPath }/${site.profile}" style='width:200px'>
 					<h2>${site.welcomeMessage }</h2>
 					<p>
-						${site.description }
+						${fn:replace(site.description,newline ,"<br/>")}
 						<a href="${pageContext.request.contextPath }/guestbook">방명록</a>에 글 남기기<br>
 					</p>
 				</div>

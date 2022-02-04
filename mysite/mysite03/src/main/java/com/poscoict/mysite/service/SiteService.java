@@ -15,7 +15,6 @@ public class SiteService {
 	@Autowired
 	private ServletContext servletContext;
 
-	// 메인 페이지
 	public boolean updateSite(SiteVo siteVo) {
 		servletContext.setAttribute("site", siteVo);
 		return siteRepository.updateSite(siteVo);

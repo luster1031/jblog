@@ -26,19 +26,19 @@ public class AdminController {
 	private FileUploadService fileUploadService;
 	
 	@RequestMapping({"","/main"})
-	public String main(SiteVo siteVo, Model model) {
+	public String main(Model model) {
+		SiteVo site = siteService.getContents();
+		model.addAttribute("site",site);
 		return "admin/main";	
 	}
 	
 	@RequestMapping(value="main/update", method=RequestMethod.POST)
 	public String update(SiteVo siteVo
 			,@RequestParam(value="file1") MultipartFile multipartFile) {
-
 		String url = fileUploadService.restore(multipartFile);
 		siteVo.setProfile(url);
-		System.out.println("----update-----" + siteVo.toString());
 		siteService.updateSite(siteVo);
-		return "redirect:/main"; 
+		return "redirect:/admin"; 
 	 }
 	 
 	
