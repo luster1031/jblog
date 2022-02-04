@@ -1,8 +1,8 @@
 /**
  * 2022.02.04
  * 임한나
- * 회원 가입, 
- * */
+ * 로그인, 로그아웃, 회원가입
+ *  */
 package com.poscoict.jblog.controller;
 import javax.validation.Valid;
 
