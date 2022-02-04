@@ -17,4 +17,8 @@ public class UserService {
 		userRepository.insert(vo);
 	}
 
+	public UserVo CheckUser(String id, String password) {
+		return userRepository.login(id, password);
+	}
+
 }
