@@ -15,7 +15,7 @@
 
 
 	<!-- Message Converter, Handler Mapping, Validator 생성 및 설정 -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven />
 
 	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet 위임(delegate) Handler -->
 	<mvc:default-servlet-handler />
@@ -35,7 +35,14 @@
 	</bean>
 
 	<!-- 6. MessageSource -->
-
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages_ko</value>
+			</list>
+		</property>
+	</bean>
 
 	<!-- 멀티파트 리졸버 -->
 	<bean id="multipartResolver"
