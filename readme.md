@@ -2,6 +2,10 @@
 # practice
    + [과제 - 자바 연습문제](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/practice)
 
+# [jblog](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/jblog)
+   + [jblog03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/jblog/jblog03) 
+      + Spring MVC 평가과제
+
 # mysite
    + [mysite02](https://github.com/luster1031/JAVA_Expert_courses_Practice)
       +  servlet + jsp(mvc)
@@ -19,7 +23,12 @@
 + [emaillist03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/emaillist03)
 + [guestbook03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/guestbook03)
 + [helloweb03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/helloweb03)
-
++ [logex](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/logex)
+   + logging - log 생성
++ [fileuplod](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/fileupload)
+   +  Multipart Resolver
++ [aoptest](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/aoptest)
+   +   AOP (Aspect Oriented Programming)
 
 # [servlet-practice](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice)
 + [db](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice/db)
