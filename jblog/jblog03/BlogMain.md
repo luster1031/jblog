@@ -1,7 +1,8 @@
 # 블로그 메인
-## 1. blog-header생성 - 로그인 여부에 따른 header가 달라야하기 때문.
-## 2. JblogController, BlogService, BlogRepository 생성
-## 3. JblogController 설정
+### 1. blog-header생성 - 로그인 여부에 따른 header가 달라야하기 때문.
+### 2. JblogController, BlogService, BlogRepository 생성
+---
+### 3. JblogController 설정
 + ```${pageContext.request.contextPath}/${authUser.id}```로 부르기 때문에
 + ```@PathVariable```로 user_id 값을 받아야 한다.
 >JblogController.java 
@@ -10,8 +11,10 @@
 public String main(String id) {
 }
 ```
-## 4. BlogVo 생성
-## 5. DB에서 id에 따른 블로그 정보 가져오기
+----
+### 4. BlogVo 생성
+---
+### 5. DB에서 id에 따른 블로그 정보 가져오기
 1. 처음 가입할 때, 디폴트 값으로 title, id, 이미지 정보를 저장해 둔다. 
     > UserController.java
     ```java
@@ -54,8 +57,8 @@ public String main(String id) {
         ```
     + authUser.id를 쓰면 안되는 이유
         + 로그인을 안 한 상태에서 blog를 방문 할 수 있기 때문이다.
-
-## 6. 카테고리 클릭
+---
+### 6. 카테고리 클릭
 1. 카테고리 클릭시 no를 url에 전달
     ```jsp
     <li><a href="${pageContext.request.contextPath}/${authUser.id}/${category.no}">${category.name }</a></li>
@@ -75,7 +78,8 @@ public String main(String id) {
     //	post, category 초기값 설정
     category = category!=null?category:1;
     ```
-## 7. 포스터 클릭 시 페이지 목록 나타내기
+---
+### 7. 포스터 클릭 시 페이지 목록 나타내기
 + 포스터 클릭시 포스터no를 url에 전달 후 controller에서 처리
 
     ```java
