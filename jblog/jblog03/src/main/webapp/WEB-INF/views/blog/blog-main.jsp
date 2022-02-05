@@ -8,8 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<Link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
 	<div id="container">
@@ -24,7 +23,7 @@
 				<ul class="blog-list">
 					<c:forEach items="${map.post }" var="list" varStatus="status">
 					<li>
-						<a href="">${list.title }</a> <span>${list.reg_date }</span>
+						<a href="${pageContext.request.contextPath}/jblog/${map.id}/${map.categoryNum}/${list.no}">${list.title }</a> <span>${list.reg_date }</span>
 					</li>
 					</c:forEach>
 				</ul>
@@ -43,7 +42,7 @@
 			
 			<ul>
 				<c:forEach items="${map.category }" var="category" varStatus="status">
-					<li><a href="">${category.name }</a></li>
+					<li><a href="${pageContext.request.contextPath}/jblog/${map.id}/${category.no}">${category.name }</a></li>
 				</c:forEach>
 			</ul>
 		</div>

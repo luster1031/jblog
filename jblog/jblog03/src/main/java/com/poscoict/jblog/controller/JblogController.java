@@ -9,15 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.poscoict.jblog.service.BlogService;
 
 @Controller
-@RequestMapping("/{id}")
+@RequestMapping("jblog/{id}")
 public class JblogController {
 	@Autowired
 	private BlogService blogservice;
 	
-	@RequestMapping("")
-	public String main(@PathVariable("id") String id, Model model) {
-		System.out.println(id + "블로그");
-		blogservice.ContentBlog(id, model);
+	@RequestMapping({"/{category}/{post}","","/{category}"})
+	public String main(@PathVariable("id") String id
+			,@PathVariable(required=false) Long category
+			,@PathVariable(required=false) Long post
+			, Model model) {
+		//	post, category 초기값 설정
+		category = category!=null?category:1;
+		post = post!=null?post:0;
+		System.out.println(category + " "+ post);
+		blogservice.ContentBlog(id,category, post, model);
+		
 		return "blog/blog-main";
 	}
 	

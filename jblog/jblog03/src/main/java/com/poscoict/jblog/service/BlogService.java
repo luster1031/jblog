@@ -26,14 +26,27 @@ public class BlogService {
 	@Autowired
 	private PostRepository postrepository;
 
-	public void ContentBlog(String id, Model model) {
+	public void ContentBlog(String id, Long category, Long post, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		BlogVo vo = blogrepository.getContent(id);
 		List<CategoryVo> categoryList = categoryrepository.getCategory(id);
-		List<PostVo> postvo = postrepository.getPost(categoryList.get(0).getNo());
+		
+		//	현재 카테고리의 포스트no의 최댓값
+		if(post==0) {
+			post = postrepository.getMaxPost(category);
+			System.out.println("post없어서" + post);
+		}
+		//포스트가 몇 번째인지 받아오기,
+		Long postNumber=postrepository.getPostNumber(post,category);
+		System.out.println("[post] : " + post);
+		System.out.println("[number] : "+ postNumber);
+		List<PostVo> postvo = postrepository.getPost(category, postNumber);
 		map.put("blog", vo);
 		map.put("category", categoryList);
 		map.put("post", postvo);
+		map.put("categoryNum", category);
+		map.put("id", id);
+		
 		System.out.println(map.toString());
 		model.addAttribute("map", map);
 	}
