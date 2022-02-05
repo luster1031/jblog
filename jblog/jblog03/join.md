@@ -1,32 +1,33 @@
 # 1. Main servlet 설정
-    >MainController.java
-    ```java
-    @Controller
-    public class MainController {
-        @RequestMapping({"","/main"})
-        public String main() {
-            return "main/index";
-        }
+>MainController.java
+
+```java
+@Controller
+public class MainController {
+    @RequestMapping({"","/main"})
+    public String main() {
+        return "main/index";
     }
-    ```
+}
+```
 
 # 2. User servlet 설정
-    > UserController.java
-    + login, logout, join 함수를 일단 만들어 놓는다. 
-    ```java
-    @RequestMapping("/join")
-	public String join() {
-		return "user/join";
-	}
-	@RequestMapping("/login")
-	public String login() {
-		return "user/login";
-	}
-	@RequestMapping("/logout")
-	public String logout() {
-		return "user/logout";
-	}
-    ```
+> UserController.java
++ login, logout, join 함수를 일단 만들어 놓는다. 
+```java
+@RequestMapping("/join")
+public String join() {
+    return "user/join";
+}
+@RequestMapping("/login")
+public String login() {
+    return "user/login";
+}
+@RequestMapping("/logout")
+public String logout() {
+    return "user/logout";
+}
+```
 
 
 # 3. 회원 가입
@@ -193,7 +194,8 @@
             private UserService userService;
         ```
         <br>
-        >UserService.java
+        
+        > UserService.java
         
         ```java
         @Service
@@ -204,7 +206,8 @@
         }
         ```
         <br>
-        >UserRepository.java
+        
+        > UserRepository.java
         
         ```java
             @Repository
