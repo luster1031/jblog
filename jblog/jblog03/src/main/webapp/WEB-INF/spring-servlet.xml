@@ -26,15 +26,23 @@
 	<!-- Interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/auth"/>
-			<bean class="com.poscoict.jblog.security.LoginInterceptor"/>
+			<mvc:mapping path="/user/auth" />
+			<bean class="com.poscoict.jblog.security.LoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/logout"/>
-			<bean class="com.poscoict.jblog.security.LogoutInterceptor"/>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.poscoict.jblog.security.LogoutInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/jblog/**" />
+			<bean class="com.poscoict.jblog.security.BlogInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+
+	<!-- the mvc resources tag does the magic -->
+	<mvc:resources mapping="/images/**"
+		location="file:/upload-images/" />
+
 	<!-- ViewResolver -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

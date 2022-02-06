@@ -14,5 +14,11 @@
 		where user_id=#{id};
 	]]>
 	</select>
+	<update id="update">
+	<![CDATA[
+		update blog set title=#{title}, logo=#{logo};
+	]]>
+	</update>
+	
 </mapper>
 

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%pageContext.setAttribute("newline", "\n");%>
 <!doctype html>
 <html>
 <head>
@@ -18,7 +19,8 @@
 				<div class="blog-content">
 				<!-- 임시로 0번째 -->
 					<h4>${map.post[0].title }</h4>
-					<p>${map.post[0].contents }<p>
+					<p>
+						${fn:replace(map.post[0].contents,newline ,"<br/>")}<p>
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${map.post }" var="list" varStatus="status">
@@ -33,7 +35,7 @@
 		<div id="extra">
 			<div class="blog-logo">
 				<img
-					src="${pageContext.request.contextPath}/assets${map.blog.logo}">
+					src="${pageContext.request.contextPath}${map.blog.logo}">
 			</div>
 		</div>
 

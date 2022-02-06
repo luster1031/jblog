@@ -19,34 +19,39 @@ import com.poscoict.jblog.vo.PostVo;
 public class BlogService {
 	@Autowired
 	private BlogRepository blogrepository;
-	
+
 	@Autowired
 	private CategoryRepository categoryrepository;
-	
+
 	@Autowired
 	private PostRepository postrepository;
 
 	public void ContentBlog(String id, Long category, Long post, Model model) {
 		Map<String, Object> map = new HashMap<>();
-		BlogVo vo = blogrepository.getContent(id);
+		BlogVo vo = blogrepository.getContent(id);	// 포스트가 몇 번째인지 받아오기,
 		List<CategoryVo> categoryList = categoryrepository.getCategory(id);
-		
-		//	현재 카테고리의 포스트no의 최댓값
-		if(post==0) {
-			post = postrepository.getMaxPost(category);
-			System.out.println("post없어서" + post);
+		Long postNumber = (long) 1;
+		if (categoryList.size() == 0) {
+			category = (long) 0;
+		} else {
+			// 현재 카테고리의 포스트no의 최댓값
+			if (post == 0) {
+				post = postrepository.getMaxPost(category);
+				System.out.println("post없어서" + post);
+			}
+			// 포스트가 몇 번째인지 받아오기,
+			postNumber = postrepository.getPostNumber(post, category);
+			System.out.println("[post] : " + post);
+			System.out.println("[number] : " + postNumber);
+			
 		}
-		//포스트가 몇 번째인지 받아오기,
-		Long postNumber=postrepository.getPostNumber(post,category);
-		System.out.println("[post] : " + post);
-		System.out.println("[number] : "+ postNumber);
 		List<PostVo> postvo = postrepository.getPost(category, postNumber);
 		map.put("blog", vo);
 		map.put("category", categoryList);
 		map.put("post", postvo);
 		map.put("categoryNum", category);
 		map.put("id", id);
-		
+
 		System.out.println(map.toString());
 		model.addAttribute("map", map);
 	}
@@ -55,5 +60,16 @@ public class BlogService {
 		blogrepository.DefaultContent(id);
 	}
 
+	public void BasicAdmin(String id, Model model) {
+		Map<String, Object> map = new HashMap<>();
+
+		BlogVo vo = blogrepository.getContent(id);
+		map.put("blog", vo);
+		model.addAttribute("map", map);
+	}
+
+	public void updateBlog(BlogVo blogvo) {
+		blogrepository.updateContent(blogvo);
+	}
 
 }

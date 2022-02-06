@@ -12,7 +12,12 @@
 			</c:when>
 			<c:otherwise>
 				<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-				<li><a href="">블로그 관리</a></li>
+				
+				<c:choose>
+					<c:when test="${authUser.id eq map.blog.user_id}">
+						<li><a href="${pageContext.request.contextPath}/jblog/${map.id}/admin/basic">블로그 관리</a></li>
+					</c:when>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 	</ul>
