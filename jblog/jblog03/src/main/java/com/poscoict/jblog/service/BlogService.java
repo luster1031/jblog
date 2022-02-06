@@ -31,35 +31,40 @@ public class BlogService {
 		BlogVo vo = blogrepository.getContent(id);	// 포스트가 몇 번째인지 받아오기,
 		List<CategoryVo> categoryList = categoryrepository.getCategory(id);
 		Long postNumber = (long) 1;
+		//	카테고리가 없다면, 포스트도 받을 필요가 없다.
 		if (categoryList.size() == 0) {
 			category = (long) 0;
 		} else {
+			if(category == 0) {
+				// 카테고리의 최신 카테고리 번호 값
+				category = categoryrepository.getMaxCategory(id);
+			}
 			// 현재 카테고리의 포스트no의 최댓값
 			if (post == 0) {
 				post = postrepository.getMaxPost(category);
-				System.out.println("post없어서" + post);
+				System.out.println(post);
 			}
 			// 포스트가 몇 번째인지 받아오기,
 			postNumber = postrepository.getPostNumber(post, category);
-			System.out.println("[post] : " + post);
-			System.out.println("[number] : " + postNumber);
-			
+			postNumber = postNumber==null?1:postNumber;
+			System.out.println(category + " " + postNumber);
+			List<PostVo> postvo = postrepository.getPost(category, postNumber-1);
+			if(!postvo.isEmpty())
+				map.put("post", postvo);
 		}
-		List<PostVo> postvo = postrepository.getPost(category, postNumber);
 		map.put("blog", vo);
 		map.put("category", categoryList);
-		map.put("post", postvo);
 		map.put("categoryNum", category);
 		map.put("id", id);
 
-		System.out.println(map.toString());
 		model.addAttribute("map", map);
 	}
-
+	//	디폴트 값
 	public void DefaultContent(String id) {
 		blogrepository.DefaultContent(id);
 	}
-
+	
+	//	블로그 정보 불러오기
 	public void BasicAdmin(String id, Model model) {
 		Map<String, Object> map = new HashMap<>();
 
@@ -67,9 +72,14 @@ public class BlogService {
 		map.put("blog", vo);
 		model.addAttribute("map", map);
 	}
-
+	
+	//	블로그 정보 수정
 	public void updateBlog(BlogVo blogvo) {
 		blogrepository.updateContent(blogvo);
 	}
+
+	
+
+	
 
 }

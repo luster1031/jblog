@@ -76,7 +76,7 @@ public String main(String id) {
     + category가 안 들어와도(null) 기본값 설정이 가능함. 
     ```java
     //	post, category 초기값 설정
-    category = category!=null?category:1;
+    category = category!=null?category:0;
     ```
 ---
 ### 7. 포스터 클릭 시 페이지 목록 나타내기
@@ -89,7 +89,7 @@ public String main(String id) {
                 ,@PathVariable(required=false) Long post
                 , Model model) {
             //	post, category 초기값 설정
-            category = category!=null?category:1;
+            category = category!=null?category:0;
             post = post!=null?post:0;
         }
 
@@ -148,3 +148,5 @@ public String main(String id) {
         ]]>
         </select>
         ```
+        + 여기서 주의해야 할 점은 limit는 0부터 시작한다. 
+            + limit 0, 5로 해야 첫번째 행부터 나온다. 

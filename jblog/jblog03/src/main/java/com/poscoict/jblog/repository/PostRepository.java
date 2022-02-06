@@ -18,7 +18,7 @@ public class PostRepository {
 	public List<PostVo> getPost(Long category_no, Long start_num) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("category_no", (int) (long)category_no);
-		map.put("start_num", ((int) (long)start_num)-1);
+		map.put("start_num", (int) (long)start_num);
 		List<PostVo> vo = sqlSession.selectList("post.findByid",map);
 		System.out.println(vo.toString());
 		return vo;

@@ -10,3 +10,7 @@
     + 블로그 title, 이미지 바꾸기
 + 접근 제한
     + 다른 아이디 유저가 블로그 정보 수정 url 접근 못 하게
+### [블로그 카테고리 관리](https://github.com/luster1031/JAVA_Expert_courses_Practice/blob/master/jblog/jblog03/category-admin.md)
++ 카테고리 정보 보기
++ 카테고리 추가
++ 카테고리 삭제

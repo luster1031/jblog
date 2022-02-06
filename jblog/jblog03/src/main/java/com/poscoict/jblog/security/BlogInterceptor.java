@@ -17,10 +17,16 @@ public class BlogInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+	//  java.lang.ClassCastException: org.springframework.web.servlet.resource.
+			if (handler instanceof HandlerMethod == false) {
+				return true;
+			}
 		//1. pathValue에서 받았던 id받기
 		@SuppressWarnings("unchecked")
 		Map<String, Object> user_id = (Map<String, Object>) request.getAttribute( HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		System.out.println("[interceptor] id : "+ user_id);
+		
+		
 		
 		// 2. casting
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
