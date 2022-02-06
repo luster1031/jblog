@@ -35,5 +35,8 @@ public class PostRepository {
 	public Long getMaxPost(Long category) {
 		return sqlSession.selectOne("post.MaxPostNum",category);
 	}
+	public void insertByCategory(PostVo vo) {
+		sqlSession.insert("post.insert", vo);
+	}
 	
 }

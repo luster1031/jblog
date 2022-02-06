@@ -3,30 +3,34 @@
 
 <mapper namespace="category">
 	<select id="list" parameterType="string" resultType="categoryvo">
-	<![CDATA[
-		select no, name, description, blog_id 
-		from category  
-		where blog_id=#{id};
-	]]>
+		<![CDATA[
+			select no, name, description, blog_id 
+			from category  
+			where blog_id=#{id};
+		]]>
 	</select>
+	
 	<select id="postCount" parameterType="string" resultType="long">
-	<![CDATA[
-		select (select count(*) from post p
-			where category_no=c.no)num 
-		from category c 
-		where blog_id=#{id};
-	]]>
+		<![CDATA[
+			select (select count(*) from post p
+				where category_no=c.no)num 
+			from category c 
+			where blog_id=#{id};
+		]]>
 	</select>
+	
 	<insert id="insert" parameterType="categoryvo">
-	<![CDATA[
-		insert into category values(null, #{name}, #{description}, #{blog_id});
-	]]>
+		<![CDATA[
+			insert into category values(null, #{name}, #{description}, #{blog_id});
+		]]>
 	</insert>
+	
 	<select id="MinPostNum" parameterType="String" resultType="long">
-	<![CDATA[
-		select min(no) from category where blog_id=#{id};
-	]]>
+		<![CDATA[
+			select min(no) from category where blog_id=#{id};
+		]]>
 	</select>
+	
 	<delete id="delete" parameterType="Long">
 		<![CDATA[
 		delete from category 

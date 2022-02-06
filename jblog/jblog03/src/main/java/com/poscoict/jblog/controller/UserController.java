@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.poscoict.jblog.service.BlogService;
+import com.poscoict.jblog.service.CategoryService;
 import com.poscoict.jblog.service.UserService;
 import com.poscoict.jblog.vo.UserVo;
 
@@ -26,6 +27,9 @@ public class UserController {
 	@Autowired
 	private BlogService blogservice;
 	
+	@Autowired
+	private CategoryService categoryservice;
+
 	@RequestMapping("/login")
 	public String login() {
 		return "user/login";
@@ -46,6 +50,7 @@ public class UserController {
 		}
 		userService.join(vo);
 		blogservice.DefaultContent(vo.getId());
+		categoryservice.DefaultContent(vo.getId());
 		return "/user/joinsuccess";
 	}
 

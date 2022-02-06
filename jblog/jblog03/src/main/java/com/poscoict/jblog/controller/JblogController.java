@@ -18,6 +18,7 @@ import com.poscoict.jblog.service.CategoryService;
 import com.poscoict.jblog.service.FileUploadService;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
+import com.poscoict.jblog.vo.PostVo;
 
 @Controller
 @RequestMapping("/jblog/{id}")
@@ -93,5 +94,24 @@ public class JblogController {
 			, Model model) {
 		categoryservice.deleteCategory(index);
 		return "redirect:/jblog/"+id+"/admin/category";
+	}
+	
+//	블로그 글 추가 폼
+	@Auth
+	@RequestMapping(value="admin/write", method = RequestMethod.GET)
+	public String adminWriteForm(@PathVariable("id") String id
+			, Model model) {
+		categoryservice.getContentCategory(id, model);
+		return "blog/blog-admin-write";
+	}
+	
+//	블로그 글 추가
+	@Auth
+	@RequestMapping(value="admin/write", method = RequestMethod.POST)
+	public String adminWrite(@PathVariable("id") String id
+			, @ModelAttribute PostVo vo
+			, Model model) {
+		categoryservice.insertPost(id, vo);
+		return "redirect:/jblog/"+id;
 	}
 }

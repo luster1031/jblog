@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 
 import com.poscoict.jblog.repository.BlogRepository;
 import com.poscoict.jblog.repository.CategoryRepository;
+import com.poscoict.jblog.repository.PostRepository;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
+import com.poscoict.jblog.vo.PostVo;
 
 @Service
 public class CategoryService {
@@ -21,6 +23,9 @@ public class CategoryService {
 
 	@Autowired
 	private CategoryRepository categoryrepository;
+
+	@Autowired
+	private PostRepository postrepository;
 
 	//	카테고리 추가
 	public void updateCategory(CategoryVo vo, String id) {
@@ -43,6 +48,18 @@ public class CategoryService {
 		map.put("id", id);
 		map.put("count", countPost);
 		model.addAttribute("map", map);
+	}
+
+	public void insertPost(String id, PostVo vo) {
+		postrepository.insertByCategory(vo);
+	}
+
+	//	카테고리 초기값 설정
+	public void DefaultContent(String id) {
+		CategoryVo vo = new CategoryVo();
+		vo.setDescription("카테고리를 지정하지 않았습니다.");
+		vo.setName("미분류");
+		updateCategory(vo, id);
 	}
 
 	
