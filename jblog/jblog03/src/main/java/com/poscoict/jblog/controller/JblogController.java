@@ -1,15 +1,15 @@
 package com.poscoict.jblog.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poscoict.jblog.security.Auth;
@@ -21,7 +21,7 @@ import com.poscoict.jblog.vo.CategoryVo;
 import com.poscoict.jblog.vo.PostVo;
 
 @Controller
-@RequestMapping("/jblog/{id}")
+@RequestMapping("/jblog/{id:(?!assets).*}")
 public class JblogController {
 	@Autowired
 	private BlogService blogservice;
@@ -34,13 +34,30 @@ public class JblogController {
 	//main-page
 	@RequestMapping({"/{category}/{post}","","/{category}"})
 	public String main(@PathVariable("id") String id
-			,@PathVariable(required=false) Long category
-			,@PathVariable(required=false) Long post
+			/* 코드리뷰 */
+			,@PathVariable("category") Optional<Long> category //--> null처리
+			,@PathVariable("post") Optional<Long> post
+			
+//			,@PathVariable(required=false) Long category
+//			,@PathVariable(required=false) Long post
 			, Model model) {
+		
 		//	post, category 초기값 설정
-		category = category!=null?category:0;
-		post = post!=null?post:0;
-		blogservice.ContentBlog(id,category, post, model);
+//		category = category!=null?category:0;
+//		post = post!=null?post:0;
+		
+		/* 코드리뷰 */
+		Long categoryNo = 0L;
+		Long postNO = 0L;
+		if(category.isPresent()) {
+			categoryNo = category.get();
+		}else if(post.isPresent()){
+			categoryNo = category.get();
+			postNO = post.get();
+		}
+//		
+		
+		blogservice.ContentBlog(id,categoryNo, postNO, model);
 		return "blog/blog-main";
 	}
 	
