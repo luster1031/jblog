@@ -11,8 +11,12 @@
       +  servlet + jsp(mvc)
    + [mysite03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/mysite/mysite03)
       + spring mvc (웹 어플리케이션 만들기)
+      + auto(xml) + explicty(xml)
    + mysite04
+      + auto(java) + explicty(java)
    + mysite04
+      + mysite04 설정 유지
+      + web.xml 업앰
    + mysite05 : spring mvc -> war
    + mysite06 : spring boot -> jar, war
 
