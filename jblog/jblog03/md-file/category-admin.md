@@ -135,8 +135,9 @@
 		where (
 			select count(*) from post p 
 			where p.category_no=#{category_no})=0 
-		and no=#{category_no};
+		and no=#{category_no} and name!='미분류';
 		]]>
 	</delete>
     ```
     + post의 개수가 0인 category만 삭제해야한다. 
+	+ 추가) 카테고리가 '미분류'는 기본 카테고리기 때문에, 삭제하면 안된다. 

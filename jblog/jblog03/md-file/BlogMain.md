@@ -81,19 +81,42 @@ public String main(String id) {
 ---
 ### 7. 포스터 클릭 시 페이지 목록 나타내기
 + 포스터 클릭시 포스터no를 url에 전달 후 controller에서 처리
-
-    ```java
-    @RequestMapping({"/{category}/{post}","","/{category}"})
+    1. PathVariable 의 required=false처리
+        ```java
+        @RequestMapping({"/{category}/{post}","","/{category}"})
+            public String main(@PathVariable("id") String id
+                    ,@PathVariable(required=false) Long category
+                    ,@PathVariable(required=false) Long post
+                    , Model model) {
+                //	post, category 초기값 설정
+                category = category!=null?category:0;
+                post = post!=null?post:0;
+            }
+        ```
+    2. PathVariable의 Optional로 처리
+        ```java
+        @RequestMapping({"/{category}/{post}","","/{category}"})
         public String main(@PathVariable("id") String id
-                ,@PathVariable(required=false) Long category
-                ,@PathVariable(required=false) Long post
+                /* 코드리뷰 */
+                ,@PathVariable("category") Optional<Long> category //--> null처리
+                ,@PathVariable("post") Optional<Long> post
                 , Model model) {
-            //	post, category 초기값 설정
-            category = category!=null?category:0;
-            post = post!=null?post:0;
+            
+            /* 코드리뷰 */
+            Long categoryNo = 0L;
+            Long postNO = 0L;
+            if(post.isPresent()) {
+                categoryNo = category.get();
+                postNO = post.get();
+            }else if(category.isPresent()){
+                categoryNo = category.get();
+            }
+            blogservice.ContentBlog(id,categoryNo, postNO, model);
+            return "blog/blog-main";
         }
 
-    ```
+        ```
+        
 + 첫 메인 페이지는 카테고리가 1번이고, post는 카테고리별 최댓값을 하기위해 0을 지정하였다. -> 밑에 1번 수행
 
 <br>
@@ -150,3 +173,33 @@ public String main(String id) {
         ```
         + 여기서 주의해야 할 점은 limit는 0부터 시작한다. 
             + limit 0, 5로 해야 첫번째 행부터 나온다. 
+----
+### 8. category와 post url에 숫자가 아닌 것이 올 때 처리
+1. BlogInterceptor에서의 처리
+    ```java
+    @SuppressWarnings("unchecked")
+        Map<String, Object> user_id = (Map<String, Object>) request.getAttribute( HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+        System.out.println("[interceptor] id : "+ user_id);
+        
+        //	post와 category에 숫자를 안 넣으면 main문으로
+        if(user_id.get("post")!=null) {
+            try {
+                Long category = (Long) user_id.get("category");
+                Long post = (Long)user_id.get("post");
+            }catch(Exception e) {
+                response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
+                return false;
+            }
+        }
+        if(user_id.get("category")!=null) {
+            try {
+                Long category = (Long) user_id.get("category");
+            }catch(Exception e) {
+                response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
+                return false;
+            }
+        }
+    ```
++ ```Map<String, Object> user_id = (Map<String, Object>) request.getAttribute( HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);``` 이 코드로 인해, user_id에는 pathvariable로 들어오는 모든 값이 들어있다. 
++ 들어오는 값의 post와 category가 null이 아니라면
+    + String으로 들어오기 때문에, Long으로 캐스팅을 해서 에러가 난다면 메인 페이지로 던져줬다. 

@@ -26,6 +26,24 @@ public class BlogInterceptor extends HandlerInterceptorAdapter {
 		Map<String, Object> user_id = (Map<String, Object>) request.getAttribute( HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		System.out.println("[interceptor] id : "+ user_id);
 		
+		//	post와 category에 숫자를 안 넣으면 main문으로
+		if(user_id.get("post")!=null) {
+			try {
+				Long category = (Long) user_id.get("category");
+				Long post = (Long)user_id.get("post");
+			}catch(Exception e) {
+				response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
+				return false;
+			}
+		}
+		if(user_id.get("category")!=null) {
+			try {
+				Long category = (Long) user_id.get("category");
+			}catch(Exception e) {
+				response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
+				return false;
+			}
+		}
 		
 		
 		// 2. casting
@@ -49,8 +67,6 @@ public class BlogInterceptor extends HandlerInterceptorAdapter {
 				response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
 				return false;
 			}
-			System.out.println(authUser.toString());
-			System.out.println(user_id.get("id"));
 			//	수정하려는 id가 블로그 주인이라면
 			if(authUser.getId().equals(user_id.get("id"))) {
 				return true;

@@ -34,30 +34,13 @@ public class JblogController {
 	//main-page
 	@RequestMapping({"/{category}/{post}","","/{category}"})
 	public String main(@PathVariable("id") String id
-			/* 코드리뷰 */
-			,@PathVariable("category") Optional<Long> category //--> null처리
-			,@PathVariable("post") Optional<Long> post
-			
-//			,@PathVariable(required=false) Long category
-//			,@PathVariable(required=false) Long post
+            ,@PathVariable(required=false) Long category
+            ,@PathVariable(required=false) Long post
 			, Model model) {
-		
-		//	post, category 초기값 설정
-//		category = category!=null?category:0;
-//		post = post!=null?post:0;
-		
-		/* 코드리뷰 */
-		Long categoryNo = 0L;
-		Long postNO = 0L;
-		if(category.isPresent()) {
-			categoryNo = category.get();
-		}else if(post.isPresent()){
-			categoryNo = category.get();
-			postNO = post.get();
-		}
-//		
-		
-		blogservice.ContentBlog(id,categoryNo, postNO, model);
+		//post, category 초기값 설정
+        category = category!=null?category:0;
+        post = post!=null?post:0;
+		blogservice.ContentBlog(id,category, post, model);
 		return "blog/blog-main";
 	}
 	

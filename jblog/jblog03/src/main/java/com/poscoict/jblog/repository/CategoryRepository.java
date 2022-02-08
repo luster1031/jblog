@@ -38,6 +38,7 @@ public class CategoryRepository {
 
 	//	카테고리 삭제
 	public int deleteCategory(Long category_no) {
+		System.out.println("카테고리 삭제");
 		return sqlSession.delete("category.delete", category_no);
 	}
 
