@@ -1,14 +1,14 @@
-package com.poscoict.container.config.viedosystem;
+package com.poscoict.container.config.videosystem;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.poscoict.container.viedosystem.Avengers;
-import com.poscoict.container.viedosystem.DVDPlayer;
-import com.poscoict.container.viedosystem.DigitalVideoDisc;
+import com.poscoict.container.videosystem.Avengers;
+import com.poscoict.container.videosystem.DVDPlayer;
+import com.poscoict.container.videosystem.DigitalVideoDisc;
 
 @Configuration
-public class DvdPlayerConfig {
+public class DVDPlayerConfig {
 	
 	@Bean
 	public DigitalVideoDisc avengers() {

@@ -1,4 +1,4 @@
-package com.poscoict.container.viedosystem;
+package com.poscoict.container.videosystem;
 
 public interface DigitalVideoDisc {
 

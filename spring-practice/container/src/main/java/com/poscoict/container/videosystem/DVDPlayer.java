@@ -1,11 +1,9 @@
-package com.poscoict.container.viedosystem;
+package com.poscoict.container.videosystem;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class DVDPlayer {
-	@Autowired
-	private DigitalVideoDisc dvd;
 	
+	private DigitalVideoDisc dvd;
 	
 	public DigitalVideoDisc getDvd() {
 		return dvd;

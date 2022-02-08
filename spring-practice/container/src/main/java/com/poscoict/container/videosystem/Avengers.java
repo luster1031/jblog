@@ -1,4 +1,4 @@
-package com.poscoict.container.viedosystem;
+package com.poscoict.container.videosystem;
 
 public class Avengers implements DigitalVideoDisc {
 	private String studio = "MARVEL";
