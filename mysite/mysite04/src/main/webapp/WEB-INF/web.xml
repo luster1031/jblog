@@ -4,10 +4,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<display-name>mysite04</display-name>
-		
+
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframwork.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml</param-value>
+		<param-value>com.poscoict.mysite.config.AppConfig</param-value>
 	</context-param>
 
 	<!-- Context Load Listener -->
@@ -55,7 +59,7 @@
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/error/404.jsp</location>
 	</error-page>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
