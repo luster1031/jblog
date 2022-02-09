@@ -33,6 +33,10 @@
                  |	         |		|		|	|--- config
                  |	         |		|		|	|		|--- app
                  |	         |		|		|	|		|		|-- jdbc.properties
+                 |	         |		|		|	|		|		|-- mybatis
+                 |	         |		|		|	|		|		|     |---configuration.xml
+                 |	         |		|		|	|		|		|     |---mappers
+                  
                  |	         |		|		|	|		|--- web
                  
 ```               

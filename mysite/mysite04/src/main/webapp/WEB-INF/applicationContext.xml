@@ -12,23 +12,4 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 	
-	
-
-	<!-- MyBatis SqlSessionFactoryBean -->
-	<!-- setter를 사용하는 DAO -->
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />	<!-- 주입할 bean의 id (ref) -->
-		<property name="configLocation"
-			value="classpath:mybatis/configuration.xml" />
-	</bean>
-
-	<!-- MyBatis SqlSessionTemplate -->
-	<!-- 생성자 사용하는 DAO -->
-	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
-
-
 </beans>
