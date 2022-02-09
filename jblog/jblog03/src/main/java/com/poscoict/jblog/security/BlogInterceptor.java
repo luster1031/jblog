@@ -29,17 +29,19 @@ public class BlogInterceptor extends HandlerInterceptorAdapter {
 		//	post와 category에 숫자를 안 넣으면 main문으로
 		if(user_id.get("post")!=null) {
 			try {
-				Long category = (Long) user_id.get("category");
+				Long category = Long.parseLong((String) user_id.get("category"));
 				Long post = (Long)user_id.get("post");
 			}catch(Exception e) {
+				System.out.println("post 숫자 아님");
 				response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
 				return false;
 			}
 		}
 		if(user_id.get("category")!=null) {
 			try {
-				Long category = (Long) user_id.get("category");
+				Long category = Long.parseLong((String)user_id.get("category"));
 			}catch(Exception e) {
+				System.out.println("category 숫자 아님");
 				response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
 				return false;
 			}
@@ -54,6 +56,7 @@ public class BlogInterceptor extends HandlerInterceptorAdapter {
 		
 		//	인증이 필요 없는 것
 		if (auth == null) { 
+			System.out.println("인증 필요 없음");
 			return true;
 		}
 		
