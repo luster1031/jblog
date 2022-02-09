@@ -1,20 +1,40 @@
+### Mysite04, 05 Package Structure
 ```bash
-
+mysite04
+[src]
+    |--- [main]
+        |--- [java]
+        |   |--- com.poscoict
+        |       |--- config
+                |   |--- app
+                |   |   |--- DBConfig.java 
+                |   |--- web
+                |       |--- FileuploadConfig.java
+                |       |--- MessageConfig.java
+                |       |--- MvcConfig.java
+                |       |--- SecurityConfig.java
+                |--- mysite
+                    |--- aspect
+                    |   |--- MeasureExecutionTimeAspect.java
+                    |--- config
+                    |   |--- AppConfig.java
+                    |   |--- MyBatisConfig.java
+                    |   |--- WebConfig.java
+                    |--- controller
+                    |--- exception
+                    |--- interceptor
+                    |--- repository
+                    |--- security
+                    |--- service
+                    |--- vo
+        |--- [resource]
+            |--- com
+            |   |--- poscoict
+            |       |--- mysite
+            |           |--- config
+            |               |--- app
+            |               |--- web
+            |                   |--- fileupload.properties
+            |                   |--- messages.properties
+            |--- logback.xml
 ```
-
-```xml
-<servlet>
-    <servlet-name>spring</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet
-    </servlet-class>
-    <init-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring-servlet.xml</param-value>
-    </init-param>
-</servlet>
-```
-+ xml 기반
-+ contanier보고 xml 바꾸라고 하는 것
-
-+ mxixing으로,, -
-+ 
