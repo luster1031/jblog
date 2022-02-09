@@ -94,4 +94,11 @@ public class UserController {
 		return "error/exception";
 	}
 	*/
+	@RequestMapping(value="/auth", method=RequestMethod.POST)
+	public void auth() {
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public void logout() {
+	}
 }
