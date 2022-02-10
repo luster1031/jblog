@@ -14,6 +14,7 @@ import com.poscoict.jblog.vo.UserVo;
 
 public class BlogInterceptor extends HandlerInterceptorAdapter {
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

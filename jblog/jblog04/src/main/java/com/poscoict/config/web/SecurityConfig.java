@@ -47,6 +47,6 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor()).addPathPatterns("/user/auth");
 		registry.addInterceptor(logoutInterceptor()).addPathPatterns("/user/logout");
-
+		registry.addInterceptor(blogInterceptor()).addPathPatterns("/jblog/**");
 	}
 }
