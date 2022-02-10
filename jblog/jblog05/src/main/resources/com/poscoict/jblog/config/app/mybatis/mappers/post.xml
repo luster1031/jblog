@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="post">
+	<select id="findByid" parameterType="map" resultType="postvo">
+	<![CDATA[
+		select * 
+		from post
+		where category_no=#{category_no}
+		ORDER BY no DESC
+		limit #{start_num},5;
+	]]>
+	</select>
+	
+	<select id="findPostNum" parameterType="map" resultType="long">
+	<![CDATA[
+		select  p.rownum 
+		from (select @Rownum :=@ROWNUM+1 as rownum, p.*
+				from post p, (select @rownum:=0) tmp
+				where category_no=#{category_no}
+				ORDER BY no DESC) p
+			, post post
+		where post.no=#{post_no} and p.no=#{post_no};
+	]]>
+	</select>
+	
+	<select id="MaxPostNum" parameterType="long" resultType="long">
+	<![CDATA[
+		select max(no) from post where category_no=#{category};
+	]]>
+	</select>
+	
+	<insert id="insert" parameterType="postvo" >
+	<![CDATA[
+			insert into post values(null, #{title}, #{contents} , now(), #{category_no});
+		]]>
+	</insert>
+</mapper>
+
