@@ -37,11 +37,11 @@ public class MySiteWebApplicationInitializer extends AbstractAnnotationConfigDis
 
 
 
-//	// 해당 url에 핸들러가 없으면 exception 던지겠다. 
-//	@Override
-//	protected void customizeRegistration(Dynamic registration) {
-//		registration.setInitParameter("throwExceptionIfNoHandlerFound", "");
-//	}
+	// 해당 url에 핸들러가 없으면 exception 던지겠다. 
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+	}
 	
 	
 }

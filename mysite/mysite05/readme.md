@@ -80,13 +80,31 @@
 
 ```
 ### 6. 공통 에러 메시지
+1. 
 ```xml
 // 해당 url에 핸들러가 없으면 exception 던지겠다. 
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
-		registration.setInitParameter("throwExceptionIfNoHandlerFound", "");
+		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
 	}
 ```
+
+2. DefaultServlet Handler 주석달기
+```xml
+//	//	DefaultServlet Handler 
+//	@Override
+//	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//		configurer.enable();
+//	}
+```
+3. assets를 
+3. propertise 추가
+```propertise
+assets.assetsMapping=/assets/**
+assets.assetsLocation=/com/poscoict/mysite/assets/
+```
+
+4. 
 + defaultservlet 주석
 + 리소스 맵핑
 + 가상 url을 클래스 패스로
