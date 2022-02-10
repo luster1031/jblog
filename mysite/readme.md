@@ -9,4 +9,9 @@
  
  + 게시판만들기
  	+ repository, service, controller로 만들기
- 
+	
+# [mysite04](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/mysite/mysite04)
++ xml config to java config
+	
+# [mysite05](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/mysite/mysite05)
++ web.xml -> Initailizer

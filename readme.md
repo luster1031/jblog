@@ -1,27 +1,31 @@
-
-# practice
+# 과제
+## practice
    + [과제 - 자바 연습문제](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/practice)
 
-# [jblog](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/jblog)
+## [jblog](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/jblog)
    + [jblog03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/jblog/jblog03) 
       + Spring MVC 평가과제
+   + [Jblog04](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/jblog/jblog04)
+      + changed the xml-Config to java-Config
+   + [jblog05](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/jblog/jblog05)
+      + changed web.xml -> Initailizer 
 
-# mysite
+## mysite
    + [mysite02](https://github.com/luster1031/JAVA_Expert_courses_Practice)
       +  servlet + jsp(mvc)
    + [mysite03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/mysite/mysite03)
       + spring mvc (웹 어플리케이션 만들기)
       + auto(xml) + explicty(xml)
-   + mysite04
+   + [mysite04](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/mysite/mysite04)
       + auto(java) + explicty(java)
-   + mysite04
-      + mysite04 설정 유지
-      + web.xml 업앰
-   + mysite05 : spring mvc -> war
+   + [mysite05](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/mysite/mysite05) : spring mvc -> war
    + mysite06 : spring boot -> jar, war
 
+<br>
 
-# spring-practice
+
+# Spring
+## spring-practice
 + [java-study](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/java-study)
    +  예외처리 
 + [emaillist03](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/emaillist03)
@@ -35,7 +39,15 @@
    +   AOP (Aspect Oriented Programming)
 + [container](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/spring-practice/container)
 
-# [servlet-practice](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice)
+## [springboot-ex](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/springboot-ex)
+   + 
+## [springboot-practices](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/springboot-practices)
+   + 스프링 부트 연습
+
+<br>
+
+# Servlet
+## [servlet-practice](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice)
 + [db](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice/db)
 + [helloweb](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice/helloweb)
    + maven web 프로그램
@@ -58,9 +70,13 @@
 + [jstel](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/servlet-practice/jstel)
 	+ EL & JSTL 연습, scope 학습
 
-# [springboot-ex](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/springboot-ex)
- # helloweb2
+
+<br>
+
+
+# Maven
+## helloweb2
 + [maven 프로젝트 만들기 예제](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/helloweb2)
 
-# javaproject
+## javaproject
    + [maven 멀티 프로젝트](https://github.com/luster1031/JAVA_Expert_courses_Practice/tree/master/javaproject)
