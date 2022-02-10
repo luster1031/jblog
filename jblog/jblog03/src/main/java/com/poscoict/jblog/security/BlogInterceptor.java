@@ -30,7 +30,7 @@ public class BlogInterceptor extends HandlerInterceptorAdapter {
 		if(user_id.get("post")!=null) {
 			try {
 				Long category = Long.parseLong((String) user_id.get("category"));
-				Long post = (Long)user_id.get("post");
+				Long post = Long.parseLong((String)user_id.get("post"));
 			}catch(Exception e) {
 				System.out.println("post 숫자 아님");
 				response.sendRedirect(request.getContextPath() + "/jblog/"+user_id.get("id"));
