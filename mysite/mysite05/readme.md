@@ -19,26 +19,26 @@
 ```
 
 ### 3. serlvet mapping
-```
+```java
 @Override
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
 ```
-```
+```xml
 <servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 ```
 ### 4. contextConfigLocation
-```
+```java
 @Override
 	protected Class<?>[] getServletConfigClasses() {
 		return new Class<?>[] {WebConfig.class};
 	}
 ```
-```
+```xml
 <servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet
@@ -55,14 +55,14 @@
 ```
 
 ### 5. Encoding Filter
-```
+```java
 @Override
 	protected Filter[] getServletFilters() {
 		return new Filter[] {new CharacterEncodingFilter("utf-8",false)};
 	}
 
 ```
-```
+```xml
 	<!-- Encoding Filter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -80,32 +80,51 @@
 
 ```
 ### 6. 공통 에러 메시지
-1. 
-```xml
-// 해당 url에 핸들러가 없으면 exception 던지겠다. 
-	@Override
-	protected void customizeRegistration(Dynamic registration) {
-		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
-	}
-```
+1. exception 던지기
+	```java
+	// 해당 url에 핸들러가 없으면 exception 던지겠다. 
+		@Override
+		protected void customizeRegistration(Dynamic registration) {
+			registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+		}
+	```
 
 2. DefaultServlet Handler 주석달기
-```xml
-//	//	DefaultServlet Handler 
-//	@Override
-//	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-//		configurer.enable();
-//	}
-```
-3. assets를 
-3. propertise 추가
-```propertise
-assets.assetsMapping=/assets/**
-assets.assetsLocation=/com/poscoict/mysite/assets/
-```
+	```java
+	//	//	DefaultServlet Handler 
+	//	@Override
+	//	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	//		configurer.enable();
+	//	}
+	```
+3. assets를 /com/poscoict/mysite밑에 넣기
+4. propertise 추가
+	```propertise
+	assets.assetsMapping=/assets/**
+	assets.assetsLocation=/com/poscoict/mysite/assets/
+	```
 
-4. 
-+ defaultservlet 주석
-+ 리소스 맵핑
-+ 가상 url을 클래스 패스로
-+ fileupload에 addrespircehamd;er가 file이 아니고 classpath로 
+5. fileupload에 추가
+	```java
+	@Override
+		public void addResourceHandlers(ResourceHandlerRegistry registry) {
+			registry.addResourceHandler(env.getProperty("assets.assetsMapping"))
+				.addResourceLocations("classpath:" + env.getProperty("assets.assetsLocation"));
+			registry
+				.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
+				.addResourceLocations("file:" + env.getProperty("fileupload.uploadLocation"));
+		}
+	```
+	+ 여기서 assets는 classpath를 사용해야한다. 
+
+### 7. 404에러 처리
+> GlobalExceptionHandler.java
+
+```java
+@ExceptionHandler(NoHandlerFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public String Exception404() {
+		return "error/404";
+	}
+```
++ 모든 에러가 여기로 가기 때문에, ```NoHandlerFoundException```를 통해서 404에러를 처리해준다. 
