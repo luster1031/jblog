@@ -1,6 +1,7 @@
-package ex01;
+package ex04;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,13 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import ex04.component.MyComponent;
 
-//@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(classes= {MyApplication.class})
 
-// @SpringBootConfiguration 설정 클래스는 자동(스캔)으로 찾기 못함
 @SpringBootTest
-
 public class MyApplicationTest02 {
 	@Autowired
 	private MyComponent myComponent; 

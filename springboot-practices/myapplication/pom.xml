@@ -38,19 +38,6 @@
 		</dependency>
 
 
-		<!-- web 사용하고 싶을 때, -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<!-- war는 커질 수 있겠지만, 메모리 올라갈 때 (new할 때 클래스 파일만 들어감) 문제가 없음 버전 충돌이 더 문제 
-			- 일일이 다 적는게 문제임 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-
 
 		<!-- spring boot test (spring boot환경에서 테스트 할 수 있음) -->
 		<dependency>
