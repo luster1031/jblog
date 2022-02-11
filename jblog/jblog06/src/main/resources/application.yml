@@ -63,7 +63,15 @@ spring:
    config:
       activate:
          on-profile: production
-
+   # datesource
+   datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://192.168.0.69:3307/jblog?characterEncoding=UTF-8&serverTimezone=UTC
+      username: jblog
+      password: jblog
+      hikari:
+         minimum-idle: 10
+         minimum-pool-size: 20
 
 ---
 
